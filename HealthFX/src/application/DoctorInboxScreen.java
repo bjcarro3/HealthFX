@@ -40,6 +40,7 @@ public class DoctorInboxScreen extends BorderPane {
 	
 	public DoctorInboxScreen(Doctor doctor) {
 		this.doctor = doctor;
+		setupEventHandlers();
 		Font titleFont = Font.font("Verdana", 25);
 		Font textFont = Font.font("Verdana", 15);
 		Font buttonFont = Font.font("Verdana", 12);
