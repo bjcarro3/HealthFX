@@ -28,6 +28,12 @@ public class PatientInfo {
 		pharmacyName = "";
 		pharmacyAddress = "";
 	}
+	
+	public String writePatientInfo()
+	{
+		return (sex + "\n" + address + "\n" + phoneNumber + "\n" + email + "\n" + guardianName + "\n" + guardianEmail + "\n" + guardianPhone
+				 + "\n" + emergencyName + "\n" + emergencyPhone + "\n" + insuranceInfo + "\n" + pharmacyName + "\n" + pharmacyAddress);}
+
 
 	public String getSex() {
 		return sex;

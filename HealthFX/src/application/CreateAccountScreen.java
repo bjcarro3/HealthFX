@@ -1,7 +1,10 @@
 package application;
 
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -36,6 +39,17 @@ public class CreateAccountScreen extends BorderPane {
 	private TextField passwordField;
 	private Button createAccountButton;
 	private Button backButton;
+	
+	private Patient newPatient;
+	private PatientInfo newPatientInfo;
+	private MedHistory newMedHistory;
+	
+	private File newPatientDir;
+	private File patientLoginInfo;
+	private File patientData;
+	
+	private FileWriter writer;
+	
 	
 	public CreateAccountScreen() {
 		//Logo
@@ -116,6 +130,66 @@ public class CreateAccountScreen extends BorderPane {
 
 		@Override
 		public void handle(ActionEvent arg0) {
+			//Creates new patient directory if not existed
+			newPatientDir = new File("src/assets/Data/Patients/Patient_" + lastNameField.getText() + "_" + firstNameField.getText());
+			if(newPatientDir.exists()) {
+				System.out.println("Patients already exists");
+			}
+			else
+			{
+				newPatientDir.mkdir();
+				System.out.println("Patient created");
+				
+			}
+			
+			//Checks if file exists in I/O
+			patientLoginInfo = new File("src/assets/patients/" + firstNameField.getText() + lastNameField.getText() + ".txt");
+			patientData = new File("src/assets/patientinformation/" + firstNameField.getText() + lastNameField.getText() + ".txt");
+			if(patientLoginInfo.exists()) {
+				System.out.println("Patients login exists");
+			}
+			else
+			{
+		    //Writes the information to the new file and creates new file if not existed
+		    	try {
+		    		//Creates new patient login and info files
+		    		patientLoginInfo.createNewFile();
+		    		patientData.createNewFile();
+		    		
+		    		//Write login
+		    		writer = new FileWriter(patientLoginInfo);
+					writer.write(firstNameField.getText() + "\n" + lastNameField.getText() + "\n" + birthdayField.getText() + "\n" + passwordField.getText());
+			    	writer.close();
+			    	
+			    	
+			    	newPatientInfo = new PatientInfo();
+			    	newMedHistory = new MedHistory();
+			    	
+			    	newPatient = new Patient(firstNameField.getText(), lastNameField.getText(), birthdayField.getText(), newPatientInfo, newMedHistory);
+			    	
+			    	//Write Patient info
+			    	writer = new FileWriter(patientData);
+			    	writer.write(newPatient.writeInformation());
+			    	writer.close();
+			    	System.out.println("Patient login information saved");
+			    	
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+		    	
+				MedicalSystem medSys;
+				try {
+					medSys = MedicalSystem.getInstance();
+					medSys.toPatientLogin();
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+
+		
+		
 		} //End handle
 	} //End subclass
 	

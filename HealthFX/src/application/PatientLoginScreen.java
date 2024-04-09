@@ -1,6 +1,7 @@
 package application;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -37,6 +38,18 @@ public class PatientLoginScreen extends BorderPane {
 	private Button createAccountButton;
 	private Button loginButton;
 	private Button backButton;
+	
+	private Patient loginPatient;
+	private MedHistory medHist;
+	private PatientInfo patientInfo;
+	private String firstName;
+	private String lastName;
+	private String birthday;
+	
+	
+	private File loginCheckFile;
+	private File loginInfo;
+	private Scanner patientScanner;
 	
 	
 	public PatientLoginScreen() {
@@ -142,28 +155,48 @@ public class PatientLoginScreen extends BorderPane {
 	private class LoginHandler implements EventHandler<ActionEvent> {
 		@Override
 		public void handle(ActionEvent arg0) {
-			Patient patient = null;
 			if (firstNameField.getText().isBlank() || lastNameField.getText().isBlank() || birthdayField.getText().isBlank() || passwordField.getText().isBlank()) {
 				System.out.println("Empty field(s).");
 			} else {
-				MedicalSystem medSys = null;
-				try {
-					medSys = MedicalSystem.getInstance();
-				} catch (FileNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				loginCheckFile = new File("src/assets/Patients/" + firstNameField.getText() + lastNameField.getText() + ".txt");
+				//Checks if user exists
+				if(loginCheckFile.exists()){
+					try {
+						patientScanner = new Scanner(loginCheckFile);
+					} catch (FileNotFoundException e) {
+						e.printStackTrace();
+					}
+					firstName = patientScanner.nextLine();
+					lastName = patientScanner.nextLine();
+					birthday = patientScanner.nextLine();
+					if(firstName.equals(firstNameField.getText()) && lastName.equals(lastNameField.getText()) && birthday.equals(birthdayField.getText()) && patientScanner.nextLine().equals(passwordField.getText())){
+						System.out.println("Logged-In Successfully");
+						
+						loginInfo = new File("src/assets/Patients/" + firstNameField.getText() + lastNameField.getText() + ".txt");
+						
+						patientInfo = new PatientInfo();
+						medHist = new MedHistory();
+						
+						loginPatient = new Patient(firstName, lastName, birthday, patientInfo, medHist);
+						MedicalSystem medSys;
+						try {
+							medSys = MedicalSystem.getInstance();
+							medSys.toPatientView(loginPatient);
+						} catch (FileNotFoundException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						
+					}
+					else{System.out.println("Incorrect Login Information");}
 				}
+				else {System.out.println("Incorrect Login Information");}
 				
 				String fullName = firstNameField.getText().concat(lastNameField.getText());
-				if (medSys.allPatients.indexOf(fullName) != -1) {
-					
-				}
-				
-				medSys.toPatientInfoScreen(patient);
 			}
 			
 			
-		} //End handle
+		} //End handles
 	} //End subclass
 	
 	//Calls the MedicalSystem to change the screen to the home page

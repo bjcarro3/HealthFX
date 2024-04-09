@@ -18,6 +18,16 @@ public class Patient {
 		this.patientInfo = patientInfo;
 		this.medHistory = medHistory;
 	}
+	
+	//Write the patient info
+	public String writeInformation() {
+		String info = firstName + "\n" +
+				lastName + "\n" +
+				birthday + "\n" +
+				patientInfo.writePatientInfo() + "\n" +
+				medHistory.writeMedicalHistory() + "\n";
+		return info;
+	}
 
 	public String getFirstName() {
 		return firstName;

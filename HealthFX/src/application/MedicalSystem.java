@@ -101,6 +101,13 @@ public class MedicalSystem {
 		screen.requestFocus();
 	}
 	
+	public void toDoctorView(Doctor doctor, Patient patient){
+		setScreen(new DoctorView(doctor, patient));
+	}
+	
+	public void toPatientView(Patient patient) {
+		setScreen(new PatientView(patient));
+	}
 	
 	public Patient getPatient(String fullName, String inputPass) throws FileNotFoundException {
 		String fileName = "src/assets/patients/" + fullName + ".txt";

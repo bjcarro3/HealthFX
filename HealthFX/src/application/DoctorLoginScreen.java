@@ -1,6 +1,9 @@
 package application;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -34,6 +37,13 @@ public class DoctorLoginScreen extends BorderPane {
 	private TextField passwordField;
 	private Button loginButton;
 	private Button backButton;
+	
+	private File checkDoctor;
+	private Scanner doctorScanner;
+	
+	private String doctorName;
+	private ArrayList<Conversation> doctorConversations;
+	private Doctor doctor;
 	
 	public DoctorLoginScreen() {
 		//Logo
@@ -111,15 +121,29 @@ public class DoctorLoginScreen extends BorderPane {
 
 		@Override
 		public void handle(ActionEvent arg0) {
-			Doctor doctor= null;
-			MedicalSystem medSys = null;
-			try {
-				medSys = MedicalSystem.getInstance();
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			//Checks Username
+			checkDoctor = new File("src/assets/Data/Doctors/" + usernameField.getText());
+			if(checkDoctor.exists()) {
+				try {
+					//Make a scanner to get the password
+					doctorScanner = new Scanner(checkDoctor);
+					
+					//Check if password is equal to input
+					if(doctorScanner.nextLine().equals(passwordField.getText())){
+						doctorName = doctorScanner.nextLine();
+						doctorConversations = new ArrayList<Conversation>();
+						
+						doctor = new Doctor(doctorName, doctorConversations);
+						
+						MedicalSystem medSys = MedicalSystem.getInstance();
+						medSys.toDoctorSearch(doctor);
+					}
+					else {System.out.println("Incorrect login information");}
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				}
 			}
-			medSys.toDoctorSearch(doctor);
+			else {System.out.println("Incorrect login information");}
 		} //End handle
 	} //End subclass
 	

@@ -9,6 +9,10 @@ public class MedHistory {
 	
 	public MedHistory() {
 	}
+	
+	public String writeMedicalHistory() {
+		return (getAllergies() + "\n" + getConcerns() + "\n" + getHealthIssues() + "\n" + getMedications() + "\n" + getImmunizations());
+	}
 
 	public String getAllergies() {
 		return allergies;
