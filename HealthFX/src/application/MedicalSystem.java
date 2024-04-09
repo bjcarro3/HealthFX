@@ -79,6 +79,21 @@ public class MedicalSystem {
 		setScreen(new DoctorPatientInfoScreen(doctor, patient));
 	}
 	
+	public void toDoctorInboxScreen(Doctor doctor) {
+		setScreen(new DoctorInboxScreen(doctor));
+	}
+	
+	public void toDoctorConversationScreen(Doctor doctor, Patient patient) {
+		setScreen(new DoctorConversationScreen(doctor, patient));
+	}
+	
+	public void toDoctorVisitScreen(Doctor doctor, Patient patient) {
+		setScreen(new DoctorVisitScreen(doctor, patient));
+	}
+	
+	public void toMedHistoryScreen(Doctor doctor, Patient patient) {
+		setScreen(new MedHistoryScreen(doctor, patient));
+	}
 	
 	
 	private void setScreen(Parent screen) {
