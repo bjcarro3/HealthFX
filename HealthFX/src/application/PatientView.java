@@ -67,7 +67,20 @@ public class PatientView extends BorderPane {
 		visitButton = new Button[3];
 		
 		for (int i = 0; i < visitButton.length; i++) {
+			final int index = i;
+			
 			visitButton[i] = new Button("Button " + (i + 1));
+			
+			visitButton[i].setOnAction(event -> {
+				MedicalSystem medSys = null;
+				try {
+					medSys = MedicalSystem.getInstance();
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				medSys.toPatientVisitScreen(patient, index);
+			});
         }
 		VBox buttonHolder = new VBox();
 		buttonHolder.getChildren().addAll(visitButton);
