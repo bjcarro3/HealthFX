@@ -61,6 +61,11 @@ public class MedicalSystem {
 		setScreen(new PatientConversationScreen(patient));
 	}
 	
+	public void toPatientVisitScreen(Patient patient, int visitNumber) {
+		//need to work on this later
+		setScreen(new PatientVisitScreen(patient));
+	}
+	
 	//Doctor UI
 	public void toDoctorLogin() {
 		setScreen(new DoctorLoginScreen());
