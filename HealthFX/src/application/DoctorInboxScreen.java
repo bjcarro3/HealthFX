@@ -2,6 +2,8 @@ package application;
 
 import java.util.ArrayList;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -96,5 +98,45 @@ public class DoctorInboxScreen extends BorderPane {
 		this.setCenter(bodyHolder);
 		this.setRight(rightColumn);
 	}
+	/* added lines 101 - 140... debugging necessary*/ 
+	
+	 private void setupEventHandlers() {
+	        closeButton.setOnAction(new BackHandler());
+	        exitButton.setOnAction(new ExitHandler());
+	        // Add event handlers for patient buttons
+	        for (Button patientButton : messageList) {
+	            patientButton.setOnAction(new PatientButton());
+	        }
+	    }
+	 
+	 //Calls MedicalSystem to change the screen to PatientInfoScreen after clicking button.
+	 private class PatientButton implements EventHandler<ActionEvent> {
+
+	        @Override
+	        public void handle(ActionEvent event) {
+	            MedicalSystem medSys = MedicalSystem.getInstance();
+	       //     medSys.toPatientInfo(); //INCORRECT IMPLEMENTATION; NEEDS TO BE FIXED
+	        }
+	    }
+
+	    // Calls the MedicalSystem to change the screen to the home page
+	    private class BackHandler implements EventHandler<ActionEvent> {
+
+	        @Override
+	        public void handle(ActionEvent event) {
+	            MedicalSystem medSys = MedicalSystem.getInstance();
+	            medSys.toHomePage();	//Currently, clicking closeButton redirects to HomePage... FIX
+	        }
+	    }
+
+	    // Handles exit: brings user back to HomePageScreen
+	    private class ExitHandler implements EventHandler<ActionEvent> {
+
+	        @Override
+	        public void handle(ActionEvent event) {
+	        	MedicalSystem medSys = MedicalSystem.getInstance();
+	            medSys.toHomePage();	
+	        }
+	    }
 	
 }
