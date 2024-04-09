@@ -10,6 +10,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import java.io.FileNotFoundException;
 
 public class DoctorVisitScreen extends DoctorView {
 	private HBox centerHolder;
@@ -139,6 +142,7 @@ public class DoctorVisitScreen extends DoctorView {
 		sendButton.setFont(textFont);
 		sendHolder = new HBox(sendButton);
 		sendHolder.setAlignment(Pos.CENTER_RIGHT);
+		sendButton.setOnAction(new SendToPharmacyHandler());
 		
 		prescriptionHolder = new VBox(prescriptionLabel, prescriptionArea, sendHolder);
 		prescriptionHolder.setSpacing(10);
@@ -167,5 +171,13 @@ public class DoctorVisitScreen extends DoctorView {
 		
 		this.setCenter(centerHolder);
 	}
+	
+	private class SendToPharmacyHandler implements EventHandler<ActionEvent> {
 
+		@Override
+		public void handle(ActionEvent arg0) {
+			//currently just a placeholder
+		} //End handle
+	} //End subclass
+	
 }
