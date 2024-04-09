@@ -131,14 +131,26 @@ public class CreateAccountScreen extends BorderPane {
 		@Override
 		public void handle(ActionEvent arg0) {
 			//Creates new patient directory if not existed
-			newPatientDir = new File("src/assets/Data/Patients/Patient_" + lastNameField.getText() + "_" + firstNameField.getText());
+			newPatientDir = new File("src/assets/patients");
 			if(newPatientDir.exists()) {
-				System.out.println("Patients already exists");
+				System.out.println("patients already exists");
 			}
 			else
 			{
 				newPatientDir.mkdir();
-				System.out.println("Patient created");
+				System.out.println("patients created");
+				
+			}
+			
+			//Creates new patient directory if not existed
+			newPatientDir = new File("src/assets/patientinformation");
+			if(newPatientDir.exists()) {
+				System.out.println("patientsinformation already exists");
+			}
+			else
+			{
+				newPatientDir.mkdir();
+				System.out.println("patients created");
 				
 			}
 			

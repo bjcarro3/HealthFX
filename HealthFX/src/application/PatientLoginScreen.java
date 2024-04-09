@@ -158,7 +158,7 @@ public class PatientLoginScreen extends BorderPane {
 			if (firstNameField.getText().isBlank() || lastNameField.getText().isBlank() || birthdayField.getText().isBlank() || passwordField.getText().isBlank()) {
 				System.out.println("Empty field(s).");
 			} else {
-				loginCheckFile = new File("src/assets/Patients/" + firstNameField.getText() + lastNameField.getText() + ".txt");
+				loginCheckFile = new File("src/assets/patients/" + firstNameField.getText() + lastNameField.getText() + ".txt");
 				//Checks if user exists
 				if(loginCheckFile.exists()){
 					try {
