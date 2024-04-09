@@ -1,6 +1,8 @@
 package application;
 
 
+import java.io.FileNotFoundException;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -122,7 +124,13 @@ public class CreateAccountScreen extends BorderPane {
 
 			@Override
 			public void handle(ActionEvent arg0) {
-				MedicalSystem medSys = MedicalSystem.getInstance();
+				MedicalSystem medSys = null;
+				try {
+					medSys = MedicalSystem.getInstance();
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				medSys.toPatientLogin();
 			} //End handle
 		} //End subclass

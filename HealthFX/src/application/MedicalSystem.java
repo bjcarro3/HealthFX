@@ -1,4 +1,8 @@
 package application;
+import java.io.*;
+import java.util.Random;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -6,12 +10,25 @@ import javafx.scene.Scene;
 public class MedicalSystem {
 	private static MedicalSystem instance = null;
 	private Scene scene;
+	private static ArrayList<String> allPatients = new ArrayList<>();
 	
-	private MedicalSystem() {
-		
+	private MedicalSystem() throws FileNotFoundException {
+		// instantiate all Patients
+		String fileName = "src/assets/PatientList.txt";
+		File file = new File(fileName);
+        Scanner scan = new Scanner(file);
+        //String line = scan.nextLine();
+        //System.out.println("Line: " + line);
+        while (scan.hasNext()) {
+        	String line = scan.nextLine();
+        	if (line == "")
+        		break;
+        	allPatients.add(line);
+        }
+        scan.close();
 	}
 	
-	public static MedicalSystem getInstance() {
+	public static MedicalSystem getInstance() throws FileNotFoundException {
 		if(instance != null) {
 			return instance;
 		}

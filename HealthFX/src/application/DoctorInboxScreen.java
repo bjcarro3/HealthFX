@@ -1,5 +1,6 @@
 package application;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import javafx.event.ActionEvent;
@@ -115,7 +116,12 @@ public class DoctorInboxScreen extends BorderPane {
 
 	        @Override
 	        public void handle(ActionEvent event) {
-	            MedicalSystem medSys = MedicalSystem.getInstance();
+	            try {
+					MedicalSystem medSys = MedicalSystem.getInstance();
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 	       //     medSys.toPatientInfo(); //INCORRECT IMPLEMENTATION; NEEDS TO BE FIXED
 	        }
 	    }
@@ -125,7 +131,13 @@ public class DoctorInboxScreen extends BorderPane {
 
 	        @Override
 	        public void handle(ActionEvent event) {
-	            MedicalSystem medSys = MedicalSystem.getInstance();
+	            MedicalSystem medSys = null;
+				try {
+					medSys = MedicalSystem.getInstance();
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 	            medSys.toHomePage();	//Currently, clicking closeButton redirects to HomePage... FIX
 	        }
 	    }
@@ -135,7 +147,13 @@ public class DoctorInboxScreen extends BorderPane {
 
 	        @Override
 	        public void handle(ActionEvent event) {
-	        	MedicalSystem medSys = MedicalSystem.getInstance();
+	        	MedicalSystem medSys = null;
+				try {
+					medSys = MedicalSystem.getInstance();
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 	            medSys.toHomePage();	
 	        }
 	    }

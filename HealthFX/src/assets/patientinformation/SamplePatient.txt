@@ -1,0 +1,11 @@
+Male
+123 E Apache Rd, Tempe AZ
+1234567890
+samplepatient@gmail.com
+Another Patient
+guardian@gmail.com
+0987654321
+Emergency Name
+emergency@gmail.com
+1029384756
+CVS
