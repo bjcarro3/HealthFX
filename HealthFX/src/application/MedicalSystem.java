@@ -73,9 +73,15 @@ public class MedicalSystem {
 		setScreen(new DoctorLoginScreen());
 	}
 	
-	public void toDoctorSearch() {
-		setScreen(new DoctorSearchScreen());
+	public void toDoctorSearch(Doctor doctor) {
+		setScreen(new DoctorSearchScreen(doctor));
 	}
+	
+	public void toDoctorPatientInfoScreen(Doctor doctor, Patient patient) {
+		setScreen(new DoctorPatientInfoScreen(doctor, patient));
+	}
+	
+	
 	
 	private void setScreen(Parent screen) {
 		scene.setRoot(screen);

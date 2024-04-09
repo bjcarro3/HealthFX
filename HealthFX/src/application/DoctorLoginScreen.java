@@ -111,6 +111,7 @@ public class DoctorLoginScreen extends BorderPane {
 
 		@Override
 		public void handle(ActionEvent arg0) {
+			Doctor doctor= null;
 			MedicalSystem medSys = null;
 			try {
 				medSys = MedicalSystem.getInstance();
@@ -118,7 +119,7 @@ public class DoctorLoginScreen extends BorderPane {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			medSys.toDoctorSearch();
+			medSys.toDoctorSearch(doctor);
 		} //End handle
 	} //End subclass
 	

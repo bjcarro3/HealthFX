@@ -133,7 +133,7 @@ public class PatientConversationScreen extends BorderPane {
 
 		@Override
 		public void handle(ActionEvent arg0) {
-			sendArea.setText("");
+			sendArea.setText(""); //currently I have it so it just clears out the text field
 		} //End handle
 	} //End subclass
 	

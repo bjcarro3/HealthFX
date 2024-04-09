@@ -23,6 +23,8 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 
 public class DoctorSearchScreen extends BorderPane {
+	private Doctor doctor;
+	
 	private VBox messageHolder; //Holds messageButton to align
 	private VBox titleHolder; //Holds title and prompt to align
 	private VBox inputHolder; 
@@ -38,7 +40,8 @@ public class DoctorSearchScreen extends BorderPane {
 	private Button logoutButton;
 	
 	
-	public DoctorSearchScreen() {
+	public DoctorSearchScreen(Doctor doctor) {
+		this.doctor = doctor;
 		//Messages Button
 		messageButton = new Button("Messages");
 		messageButton.setPrefWidth(100);
@@ -122,7 +125,14 @@ public class DoctorSearchScreen extends BorderPane {
 
 		@Override
 		public void handle(ActionEvent arg0) {
-
+			MedicalSystem medSys = null;
+			try {
+				medSys = MedicalSystem.getInstance();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			medSys.toDoctorInboxScreen(doctor);
 		} //End handle
 	} //End subclass
 	
@@ -130,7 +140,15 @@ public class DoctorSearchScreen extends BorderPane {
 
 		@Override
 		public void handle(ActionEvent arg0) {
-
+			Patient patient= null;
+			MedicalSystem medSys = null;
+			try {
+				medSys = MedicalSystem.getInstance();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			medSys.toDoctorPatientInfoScreen(doctor, patient);
 		} //End handle
 	} //End subclass
 	

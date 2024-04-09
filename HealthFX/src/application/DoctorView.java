@@ -1,7 +1,11 @@
 package application;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
+//import application.DoctorSearchScreen.MessagesHandler;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -24,7 +28,7 @@ public class DoctorView extends BorderPane {
 	private Button addVisitButton;
 	private Button contactButton;
 	private Button medHistoryButton;
-	private ArrayList<Button> visitButtons;
+	private Button[] visitButtons;
 	private Button messagesButton;
 	private Button exitButton;
 	private ImageView logoImageView;
@@ -63,18 +67,47 @@ public class DoctorView extends BorderPane {
 		nameHolder.setSpacing(20);
 		leftColumn.getChildren().addAll(nameHolder);
 		
-		contactButton = new Button("Contact Information");
+		contactButton = new Button("Patient Information");
 		contactButton.setFont(buttonFont);
 		contactHolder = new HBox(contactButton);
 		contactHolder.setAlignment(Pos.CENTER);
 		leftColumn.getChildren().add(contactHolder);
+		contactButton.setOnAction(new PatientInfosHandler());
 		
 		medHistoryButton = new Button("Medical History");
 		medHistoryButton.setFont(buttonFont);
 		medHistoryHolder = new HBox(medHistoryButton);
 		medHistoryHolder.setAlignment(Pos.CENTER);
 		leftColumn.getChildren().add(medHistoryHolder);
+		medHistoryButton.setOnAction(new MedicalHistoryHandler());
 		
+		//visitButtons = new Button[numPatient];
+		visitButtons = new Button[3];
+		
+		for (int i = 0; i < visitButtons.length; i++) {
+			final int index = i;
+			
+			visitButtons[i] = new Button("Visit" + (i+1)); //"Patient " + (i+1) + ": " + Patient.name
+			
+			//Patient patient = null; //patient = patientID or like patient[i]
+			
+			visitButtons[i].setOnAction(event -> {
+				MedicalSystem medSys = null;
+				try {
+					medSys = MedicalSystem.getInstance();
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				//medSys.toDoctorConversationScreen(doctor, patient);
+				medSys.toDoctorVisitScreen(doctor, patient);
+			});
+		}
+		VBox buttonHolder = new VBox();
+		buttonHolder.getChildren().addAll(visitButtons);
+		buttonHolder.setAlignment(Pos.CENTER);
+		leftColumn.getChildren().add(buttonHolder);
+		/*
 		for (int i=0; i<3; i++) {
 			Button visitButton = new Button("Visit " + i);
 			visitButton.setFont(buttonFont);
@@ -82,7 +115,7 @@ public class DoctorView extends BorderPane {
 			buttonHolder.setAlignment(Pos.CENTER);
 			leftColumn.getChildren().add(buttonHolder);
 		}
-				
+		*/	
 				
 		//Right Column
 		rightColumn = new BorderPane();
@@ -97,6 +130,7 @@ public class DoctorView extends BorderPane {
 		messageHolder = new HBox(messagesButton);
 		messageHolder.setAlignment(Pos.CENTER);
 		rightColumn.setTop(messageHolder);
+		messagesButton.setOnAction(new MessagesHandler());
 		
 		//Logo
 		Image logoImage = new Image("/assets/logo.png");
@@ -114,10 +148,71 @@ public class DoctorView extends BorderPane {
 		exitHolder = new HBox(exitButton);
 		exitHolder.setAlignment(Pos.CENTER);
 		rightColumn.setBottom(exitHolder);
-		
+		exitButton.setOnAction(new LogOutHandler());
 				
 		this.setLeft(leftColumn);
 		this.setRight(rightColumn);		
 		
 	}
+	
+	private class PatientInfosHandler implements EventHandler<ActionEvent> {
+
+		@Override
+		public void handle(ActionEvent arg0) {
+			Patient patient= null;
+			MedicalSystem medSys = null;
+			try {
+				medSys = MedicalSystem.getInstance();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			medSys.toDoctorPatientInfoScreen(doctor, patient);
+		} //End handle
+	} //End subclass
+	
+	private class MedicalHistoryHandler implements EventHandler<ActionEvent> {
+
+		@Override
+		public void handle(ActionEvent arg0) {
+			MedicalSystem medSys = null;
+			try {
+				medSys = MedicalSystem.getInstance();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			medSys.toMedHistoryScreen(doctor, patient);
+		} //End handle
+	} //End subclass
+	
+	private class MessagesHandler implements EventHandler<ActionEvent> {
+
+		@Override
+		public void handle(ActionEvent arg0) {
+			MedicalSystem medSys = null;
+			try {
+				medSys = MedicalSystem.getInstance();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			medSys.toDoctorInboxScreen(doctor);
+		} //End handle
+	} //End subclass
+	
+	private class LogOutHandler implements EventHandler<ActionEvent> {
+
+		@Override
+		public void handle(ActionEvent arg0) {
+			MedicalSystem medSys = null;
+			try {
+				medSys = MedicalSystem.getInstance();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			medSys.toHomePage();
+		} //End handle
+	} //End subclass
 }

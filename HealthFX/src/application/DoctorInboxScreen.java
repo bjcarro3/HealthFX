@@ -26,7 +26,8 @@ public class DoctorInboxScreen extends BorderPane {
 	//Main Body
 	private VBox bodyHolder;
 	private Label titleLabel;
-	private ArrayList<Button> messageList;
+	//private ArrayList<Button> messageList;
+	private Button[] messageList;
 	
 	
 	//Right side
@@ -41,7 +42,7 @@ public class DoctorInboxScreen extends BorderPane {
 	
 	public DoctorInboxScreen(Doctor doctor) {
 		this.doctor = doctor;
-		setupEventHandlers();
+		//setupEventHandlers();
 		Font titleFont = Font.font("Verdana", 25);
 		Font textFont = Font.font("Verdana", 15);
 		Font buttonFont = Font.font("Verdana", 12);
@@ -55,6 +56,29 @@ public class DoctorInboxScreen extends BorderPane {
 		titleLabel.setFont(titleFont);
 		bodyHolder.getChildren().add(titleLabel);
 		
+		
+		//messageList = new Button[numPatient];
+		messageList = new Button[3];
+		
+		for (int i = 0; i < messageList.length; i++) {
+			//final int index = i;
+			
+			messageList[i] = new Button("Patient" + (i+1)); //"Patient " + (i+1) + ": " + Patient.name
+			
+			Patient patient = null; //patient = patientID or like patient[i]
+			
+			messageList[i].setOnAction(event -> {
+				MedicalSystem medSys = null;
+				try {
+					medSys = MedicalSystem.getInstance();
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				medSys.toDoctorConversationScreen(doctor, patient);
+			});
+		}
+		/*
 		for (int i=0; i<3; i++) {
 			Button patientButton = new Button("Patient " + i);
 			patientButton.setFont(textFont);
@@ -62,7 +86,7 @@ public class DoctorInboxScreen extends BorderPane {
 			patientButton.setAlignment(Pos.CENTER_LEFT);
 			bodyHolder.getChildren().add(patientButton);
 		}
-		
+		*/
 		
 		
 		
@@ -79,6 +103,7 @@ public class DoctorInboxScreen extends BorderPane {
 		closeHolder = new HBox(closeButton);
 		closeHolder.setAlignment(Pos.CENTER);
 		rightColumn.setTop(closeHolder);
+		closeButton.setOnAction(new BackHandler());
 						
 		//Logo
 		Image logoImage = new Image("/assets/logo.png");
@@ -96,12 +121,13 @@ public class DoctorInboxScreen extends BorderPane {
 		logoutHolder = new HBox(exitButton);
 		logoutHolder.setAlignment(Pos.CENTER);
 		rightColumn.setBottom(logoutHolder);
+		exitButton.setOnAction(new ExitHandler());
 		
 		this.setCenter(bodyHolder);
 		this.setRight(rightColumn);
 	}
 	/* added lines 101 - 140... debugging necessary*/ 
-	
+	/*
 	 private void setupEventHandlers() {
 	        closeButton.setOnAction(new BackHandler());
 	        exitButton.setOnAction(new ExitHandler());
@@ -125,6 +151,7 @@ public class DoctorInboxScreen extends BorderPane {
 	       //     medSys.toPatientInfo(); //INCORRECT IMPLEMENTATION; NEEDS TO BE FIXED
 	        }
 	    }
+	    */
 
 	    // Calls the MedicalSystem to change the screen to the home page
 	    private class BackHandler implements EventHandler<ActionEvent> {
@@ -138,7 +165,7 @@ public class DoctorInboxScreen extends BorderPane {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-	            medSys.toHomePage();	//Currently, clicking closeButton redirects to HomePage... FIX
+	            medSys.toDoctorSearch(doctor);	//Currently, clicking closeButton redirects to HomePage... FIX
 	        }
 	    }
 
