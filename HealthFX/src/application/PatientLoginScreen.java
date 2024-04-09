@@ -1,4 +1,5 @@
 package application;
+import java.io.File;
 import java.io.FileNotFoundException;
 
 import javafx.event.ActionEvent;
@@ -142,14 +143,26 @@ public class PatientLoginScreen extends BorderPane {
 		@Override
 		public void handle(ActionEvent arg0) {
 			Patient patient = null;
-			MedicalSystem medSys = null;
-			try {
-				medSys = MedicalSystem.getInstance();
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			if (firstNameField.getText().isBlank() || lastNameField.getText().isBlank() || birthdayField.getText().isBlank() || passwordField.getText().isBlank()) {
+				System.out.println("Empty field(s).");
+			} else {
+				MedicalSystem medSys = null;
+				try {
+					medSys = MedicalSystem.getInstance();
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				String fullName = firstNameField.getText().concat(lastNameField.getText());
+				if (medSys.allPatients.indexOf(fullName) != -1) {
+					
+				}
+				
+				medSys.toPatientInfoScreen(patient);
 			}
-			medSys.toPatientInfoScreen(patient);
+			
+			
 		} //End handle
 	} //End subclass
 	

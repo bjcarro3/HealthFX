@@ -15,7 +15,18 @@ public class PatientInfo {
 	private String pharmacyAddress;
 	
 	public PatientInfo() {
-		
+		sex = "";
+		address = "";
+		phoneNumber = "";
+		email = "";
+		guardianName = "";
+		guardianEmail = "";
+		guardianPhone = "";
+		emergencyName = "";
+		emergencyPhone = "";
+		insuranceInfo = "";
+		pharmacyName = "";
+		pharmacyAddress = "";
 	}
 
 	public String getSex() {
