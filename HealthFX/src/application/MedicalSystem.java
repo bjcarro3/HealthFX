@@ -61,9 +61,9 @@ public class MedicalSystem {
 		setScreen(new PatientConversationScreen(patient));
 	}
 	
-	public void toPatientVisitScreen(Patient patient, int visitNumber) {
+	public void toPatientVisitScreen(Patient patient, int index) {
 		//need to work on this later
-		setScreen(new PatientVisitScreen(patient));
+		setScreen(new PatientVisitScreen(patient, index));
 	}
 	
 	//Doctor UI
@@ -83,12 +83,12 @@ public class MedicalSystem {
 		setScreen(new DoctorInboxScreen(doctor));
 	}
 	
-	public void toDoctorConversationScreen(Doctor doctor, Patient patient) {
-		setScreen(new DoctorConversationScreen(doctor, patient));
+	public void toDoctorConversationScreen(Doctor doctor, Patient patient, int index) {
+		setScreen(new DoctorConversationScreen(doctor, patient, index));
 	}
 	
-	public void toDoctorVisitScreen(Doctor doctor, Patient patient) {
-		setScreen(new DoctorVisitScreen(doctor, patient));
+	public void toDoctorVisitScreen(Doctor doctor, Patient patient, int index) {
+		setScreen(new DoctorVisitScreen(doctor, patient, index));
 	}
 	
 	public void toMedHistoryScreen(Doctor doctor, Patient patient) {

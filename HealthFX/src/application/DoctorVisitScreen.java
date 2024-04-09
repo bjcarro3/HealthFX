@@ -48,7 +48,7 @@ public class DoctorVisitScreen extends DoctorView {
 	private TextArea recommendationsArea;
 	
 
-	public DoctorVisitScreen(Doctor doctor, Patient patient) {
+	public DoctorVisitScreen(Doctor doctor, Patient patient, int index) {
 		super(doctor, patient);
 		
 		//Fonts
@@ -57,7 +57,8 @@ public class DoctorVisitScreen extends DoctorView {
 				
 		//Left Side
 		//title
-		titleLabel = new Label("Visit MM-DD-YYYY");
+		String VisitLabel = "Visit "  + index + "-" + index + index + "-" + index + index + index + index;
+		titleLabel = new Label(VisitLabel);
 		titleLabel.setFont(titleFont);
 		
 		

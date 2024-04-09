@@ -15,13 +15,15 @@ public class PatientVisitScreen extends PatientView {
 	private Label visitTitle;
 	private TextArea visitText;
 
-	public PatientVisitScreen(Patient patient) {
+	public PatientVisitScreen(Patient patient, int index) {
 		super(patient);
 		
 		Font titleFont = Font.font("Verdana", 25);
 		Font summaryFont = Font.font("Verdana", 15);
 		
-		visitTitle = new Label("Visit 2-22-2222");
+		String VisitLabel = "Visit "  + index + "-" + index + index + "-" + index + index + index + index;
+		
+		visitTitle = new Label(VisitLabel);
 		visitTitle.setFont(titleFont);
 		
 		visitText = new TextArea("KJSAFKLAJSFLFSKASFJKLS");

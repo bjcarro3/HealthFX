@@ -53,7 +53,7 @@ public class DoctorConversationScreen extends BorderPane {
 	
 	
 	
-	public DoctorConversationScreen(Doctor doctor, Patient patient) {
+	public DoctorConversationScreen(Doctor doctor, Patient patient, int index) {
 		this.patient = patient;
 		Font titleFont = Font.font("Verdana", 25);
 		Font textFont = Font.font("Verdana", 15);
@@ -65,7 +65,8 @@ public class DoctorConversationScreen extends BorderPane {
 		patientNameLabel = new Label("John Smith");
 		patientNameLabel.setFont(titleFont);
 		
-		patientPhoneLabel = new Label("Phone: 111-111-TEST");
+		String patientPhoneLabelString = "Phone: " +index+index+index+ "-" +index+index+index+ "-TEST";
+		patientPhoneLabel = new Label(patientPhoneLabelString);
 		patientPhoneLabel.setFont(textFont);
 		
 		emergencyNameLabel = new Label("Emergency Contact: PERSON SMITH");

@@ -85,7 +85,7 @@ public class DoctorView extends BorderPane {
 		visitButtons = new Button[3];
 		
 		for (int i = 0; i < visitButtons.length; i++) {
-			final int index = i;
+			final int index = i + 1;
 			
 			visitButtons[i] = new Button("Visit" + (i+1)); //"Patient " + (i+1) + ": " + Patient.name
 			
@@ -100,7 +100,7 @@ public class DoctorView extends BorderPane {
 					e.printStackTrace();
 				}
 				//medSys.toDoctorConversationScreen(doctor, patient);
-				medSys.toDoctorVisitScreen(doctor, patient);
+				medSys.toDoctorVisitScreen(doctor, patient, index);
 			});
 		}
 		VBox buttonHolder = new VBox();

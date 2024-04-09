@@ -61,7 +61,7 @@ public class DoctorInboxScreen extends BorderPane {
 		messageList = new Button[3];
 		
 		for (int i = 0; i < messageList.length; i++) {
-			//final int index = i;
+			final int index = i;
 			
 			messageList[i] = new Button("Patient" + (i+1)); //"Patient " + (i+1) + ": " + Patient.name
 			
@@ -75,9 +75,10 @@ public class DoctorInboxScreen extends BorderPane {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				medSys.toDoctorConversationScreen(doctor, patient);
+				medSys.toDoctorConversationScreen(doctor, patient, index);
 			});
 		}
+		bodyHolder.getChildren().addAll(messageList);
 		/*
 		for (int i=0; i<3; i++) {
 			Button patientButton = new Button("Patient " + i);
