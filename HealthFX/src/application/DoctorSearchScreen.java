@@ -1,6 +1,8 @@
 package application;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -23,7 +25,6 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 
 public class DoctorSearchScreen extends BorderPane {
-	private Doctor doctor;
 	
 	private VBox messageHolder; //Holds messageButton to align
 	private VBox titleHolder; //Holds title and prompt to align
@@ -39,6 +40,17 @@ public class DoctorSearchScreen extends BorderPane {
 	private Button getRecordsButton;
 	private Button logoutButton;
 	
+	private MedHistory patientHist;
+	private PatientInfo patientInfo;
+	private String firstName;
+	private String lastName;
+	private String birthday;
+	
+	private Patient patient;
+	private Doctor doctor;
+	
+	private Scanner patientScanner;
+	private File patientFile;
 	
 	public DoctorSearchScreen(Doctor doctor) {
 		this.doctor = doctor;
@@ -140,15 +152,39 @@ public class DoctorSearchScreen extends BorderPane {
 
 		@Override
 		public void handle(ActionEvent arg0) {
-			Patient patient= null;
-			MedicalSystem medSys = null;
-			try {
-				medSys = MedicalSystem.getInstance();
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			//Checks first and last name via file location
+			patientFile = new File("src/assets/patients/" + firstNameField.getText() + lastNameField.getText() + ".txt");
+			
+			if(patientFile.exists())
+			{
+				try {
+					//Creates the objects to be passed into scene for usage later
+					patientScanner = new Scanner(patientFile);
+					firstName = patientScanner.nextLine();
+					lastName = patientScanner.nextLine();
+					birthday = patientScanner.nextLine();
+				
+				//Checks bithday since first and last names are already checked
+				if(birthday.equals(birthdayField.getText())) {	
+					patientInfo = new PatientInfo();
+					patientHist = new MedHistory();
+					patient = new Patient(firstName, lastName, birthday, patientInfo, patientHist);
+					
+					MedicalSystem medSys = MedicalSystem.getInstance();
+					medSys.toDoctorView(doctor, patient);
+				}
+				else
+				{
+					System.out.println("Patient does not exist");
+				}
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				}
+				
+				
 			}
-			medSys.toDoctorPatientInfoScreen(doctor, patient);
+			else
+			{System.out.println("Patient does not exist");}
 		} //End handle
 	} //End subclass
 	

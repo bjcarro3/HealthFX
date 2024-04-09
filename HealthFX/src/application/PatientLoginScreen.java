@@ -164,7 +164,7 @@ public class PatientLoginScreen extends BorderPane {
 				statusLabel.setText("Could Not Log In: Empty Fields");
 				statusLabel.setTextFill(Color.RED);
 			} else {
-				loginCheckFile = new File("src/assets/Patients/" + firstNameField.getText() + lastNameField.getText() + ".txt");
+				loginCheckFile = new File("src/assets/patients/" + firstNameField.getText() + lastNameField.getText() + ".txt");
 				//Checks if user exists
 				if(loginCheckFile.exists()){
 					try {
