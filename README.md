@@ -1,5 +1,6 @@
 This is Matthew. I am going to put a little note here that demonstrates how each of the folders/files work in this system
 
+*every bolded file/directory here exists in the src/assets folder*
 
 **PatientList.txt**
 - Lists each patient’s name [FirstnameLastname]
