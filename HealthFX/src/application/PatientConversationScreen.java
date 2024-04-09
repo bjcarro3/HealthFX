@@ -1,5 +1,7 @@
 package application;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -74,6 +76,7 @@ public class PatientConversationScreen extends BorderPane {
 		sendButton.setFont(textFont);
 		buttonHolder = new HBox(sendButton);
 		buttonHolder.setAlignment(Pos.CENTER_RIGHT);
+		sendButton.setOnAction(new SendHandler());
 		
 		//Set Up Sender Holder
 		senderHolder = new HBox(senderNameLabel, sendArea, buttonHolder);
@@ -99,6 +102,7 @@ public class PatientConversationScreen extends BorderPane {
 		closeHolder = new HBox(closeButton);
 		closeHolder.setAlignment(Pos.CENTER);
 		rightColumn.setTop(closeHolder);
+		closeButton.setOnAction(new CloseHandler());
 						
 		//Logo
 		Image logoImage = new Image("/assets/logo.png");
@@ -116,9 +120,37 @@ public class PatientConversationScreen extends BorderPane {
 		logoutHolder = new HBox(logoutButton);
 		logoutHolder.setAlignment(Pos.CENTER);
 		rightColumn.setBottom(logoutHolder);
+		logoutButton.setOnAction(new LogOutHandler());
 						
 		
 		this.setCenter(bodyHolder);
 		this.setRight(rightColumn);
 	}
+	
+	private class SendHandler implements EventHandler<ActionEvent> {
+
+		@Override
+		public void handle(ActionEvent arg0) {
+			sendArea.setText("");
+		} //End handle
+	} //End subclass
+	
+	private class CloseHandler implements EventHandler<ActionEvent> {
+
+		@Override
+		public void handle(ActionEvent arg0) {
+			MedicalSystem medSys = MedicalSystem.getInstance();
+			medSys.toPatientInfoScreen(patient);
+		} //End handle
+	} //End subclass
+	
+	private class LogOutHandler implements EventHandler<ActionEvent> {
+
+		@Override
+		public void handle(ActionEvent arg0) {
+			MedicalSystem medSys = MedicalSystem.getInstance();
+			medSys.toHomePage();
+		} //End handle
+	} //End subclass
+	
 }

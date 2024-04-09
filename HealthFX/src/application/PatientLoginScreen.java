@@ -131,9 +131,11 @@ public class PatientLoginScreen extends BorderPane {
 	} //End subclass
 	
 	private class LoginHandler implements EventHandler<ActionEvent> {
-
 		@Override
 		public void handle(ActionEvent arg0) {
+			Patient patient = null;
+			MedicalSystem medSys = MedicalSystem.getInstance();
+			medSys.toPatientInfoScreen(patient);
 		} //End handle
 	} //End subclass
 	

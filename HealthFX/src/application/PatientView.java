@@ -2,6 +2,8 @@ package application;
 
 import java.util.ArrayList;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -21,7 +23,8 @@ public class PatientView extends BorderPane {
 	protected Patient patient;
 	private Label patientName;
 	private Button contactButton;
-	private ArrayList<Button> visitButtons;
+	//private ArrayList<Button> visitButtons;
+	private Button[] visitButton;
 	private Button messagesButton;
 	private Button logoutButton;
 	private ImageView logoImageView;
@@ -57,7 +60,12 @@ public class PatientView extends BorderPane {
 		contactHolder = new HBox(contactButton);
 		contactHolder.setAlignment(Pos.CENTER);
 		leftColumn.getChildren().add(contactHolder);
+		contactButton.setOnAction(new ContactHandler());
 		
+		//visitButton = new Button[numVisit];
+		visitButton = new Button[3];
+		
+		/*
 		for (int i=0; i<3; i++) {
 			Button visitButton = new Button("Visit " + i);
 			visitButton.setFont(buttonFont);
@@ -65,7 +73,7 @@ public class PatientView extends BorderPane {
 			buttonHolder.setAlignment(Pos.CENTER);
 			leftColumn.getChildren().add(buttonHolder);
 		}
-		
+		*/
 		
 		//Right Column
 		rightColumn = new BorderPane();
@@ -80,6 +88,7 @@ public class PatientView extends BorderPane {
 		messageHolder = new HBox(messagesButton);
 		messageHolder.setAlignment(Pos.CENTER);
 		rightColumn.setTop(messageHolder);
+		messagesButton.setOnAction(new PatientMessageHandler());
 		
 		//Logo
 		Image logoImage = new Image("/assets/logo.png");
@@ -97,9 +106,40 @@ public class PatientView extends BorderPane {
 		logoutHolder = new HBox(logoutButton);
 		logoutHolder.setAlignment(Pos.CENTER);
 		rightColumn.setBottom(logoutHolder);
+		logoutButton.setOnAction(new LogOutHandler());
 		
 		
 		this.setLeft(leftColumn);
 		this.setRight(rightColumn);
 	}
+	
+	private class ContactHandler implements EventHandler<ActionEvent> {
+
+		@Override
+		public void handle(ActionEvent arg0) {
+			MedicalSystem medSys = MedicalSystem.getInstance();
+			medSys.toPatientInfoScreen(patient);
+		} //End handle
+	} //End subclass
+	
+	private class PatientMessageHandler implements EventHandler<ActionEvent> {
+
+		@Override
+		public void handle(ActionEvent arg0) {
+			MedicalSystem medSys = MedicalSystem.getInstance();
+			medSys.toPatientMessageScreen(patient);
+		} //End handle
+	} //End subclass
+	
+	
+	private class LogOutHandler implements EventHandler<ActionEvent> {
+
+		@Override
+		public void handle(ActionEvent arg0) {
+			MedicalSystem medSys = MedicalSystem.getInstance();
+			medSys.toHomePage();
+		} //End handle
+	} //End subclass
+	
+
 }

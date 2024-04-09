@@ -29,6 +29,7 @@ public class MedicalSystem {
 		setScreen(new HomePageScreen());
 	}
 	
+	//Patient UI
 	public void toPatientLogin() {
 		setScreen(new PatientLoginScreen());
 	}
@@ -37,6 +38,15 @@ public class MedicalSystem {
 		setScreen(new CreateAccountScreen());
 	}
 	
+	public void toPatientInfoScreen(Patient patient) {
+		setScreen(new PatientInfoScreen(patient));
+	}
+	
+	public void toPatientMessageScreen(Patient patient) {
+		setScreen(new PatientConversationScreen(patient));
+	}
+	
+	//Doctor UI
 	public void toDoctorLogin() {
 		setScreen(new DoctorLoginScreen());
 	}
