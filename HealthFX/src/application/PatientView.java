@@ -69,7 +69,7 @@ public class PatientView extends BorderPane {
 		for (int i = 0; i < visitButton.length; i++) {
 			final int index = i;
 			
-			visitButton[i] = new Button("Button " + (i + 1));
+			visitButton[i] = new Button("Visit " + (i + 1));
 			
 			visitButton[i].setOnAction(event -> {
 				MedicalSystem medSys = null;
