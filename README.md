@@ -16,6 +16,8 @@ This is Matthew. I am going to put a little note here that demonstrates how each
 **conversations**
 - File Name: FirstLastname.txt
 - Contents of each by line:
+    - Patient Name
+    - Doctor Name
     - [name of sender]: [message] \n
 
 **patientinfo**
@@ -29,18 +31,18 @@ This is Matthew. I am going to put a little note here that demonstrates how each
     - Guardian email
     - Guardian phone number
     - Emergency contact name
-    - Emergency contact email
     - Emergency contact phone number
     - Insurance info
-    - Pharmacy
+    - Pharmacy Name
+    - Pharmacy Address
 
 **appointments**
 - File name: FirstLastname.txt
 - Contents of each by line:
     - Date (mm/dd/yyyy)
-    - height
-    - weight
-    - temp
+    - height (float)
+    - weight (float)
+    - temp   (float)
     - blood pressure
     - new prescriptions
     - exam results
