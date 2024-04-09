@@ -1,5 +1,6 @@
 package application;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import javafx.event.ActionEvent;
@@ -117,7 +118,13 @@ public class PatientView extends BorderPane {
 
 		@Override
 		public void handle(ActionEvent arg0) {
-			MedicalSystem medSys = MedicalSystem.getInstance();
+			MedicalSystem medSys = null;
+			try {
+				medSys = MedicalSystem.getInstance();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			medSys.toPatientInfoScreen(patient);
 		} //End handle
 	} //End subclass
@@ -126,7 +133,13 @@ public class PatientView extends BorderPane {
 
 		@Override
 		public void handle(ActionEvent arg0) {
-			MedicalSystem medSys = MedicalSystem.getInstance();
+			MedicalSystem medSys = null;
+			try {
+				medSys = MedicalSystem.getInstance();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			medSys.toPatientMessageScreen(patient);
 		} //End handle
 	} //End subclass
@@ -136,7 +149,13 @@ public class PatientView extends BorderPane {
 
 		@Override
 		public void handle(ActionEvent arg0) {
-			MedicalSystem medSys = MedicalSystem.getInstance();
+			MedicalSystem medSys = null;
+			try {
+				medSys = MedicalSystem.getInstance();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			medSys.toHomePage();
 		} //End handle
 	} //End subclass

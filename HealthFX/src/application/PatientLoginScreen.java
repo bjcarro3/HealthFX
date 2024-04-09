@@ -142,7 +142,13 @@ public class PatientLoginScreen extends BorderPane {
 		@Override
 		public void handle(ActionEvent arg0) {
 			Patient patient = null;
-			MedicalSystem medSys = MedicalSystem.getInstance();
+			MedicalSystem medSys = null;
+			try {
+				medSys = MedicalSystem.getInstance();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			medSys.toPatientInfoScreen(patient);
 		} //End handle
 	} //End subclass
