@@ -8,7 +8,6 @@ public class MedHistory {
 	private String immunizations;
 	
 	public MedHistory() {
-		
 	}
 
 	public String getAllergies() {

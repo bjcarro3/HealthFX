@@ -1,1 +1,3 @@
+Sample Patient
+Sample Doctor
 Sample Patient: Thank you!
