@@ -33,6 +33,7 @@ public class DoctorLoginScreen extends BorderPane {
 	private ImageView logoImageView;
 	private Label titleLabel;
 	private Label promptLabel;
+	private Label statusLabel;
 	private TextField usernameField;
 	private TextField passwordField;
 	private Button loginButton;
@@ -61,10 +62,14 @@ public class DoctorLoginScreen extends BorderPane {
 		promptLabel = new Label("Log In");
 		promptLabel.setFont(Font.font("Verdana", FontWeight.BOLD, FontPosture.REGULAR, 28));
 		
+		//Status Text
+		statusLabel = new Label();
+		statusLabel.setFont(Font.font("Verdana", 20));
+		
 		//Place title and prompt into titleHolder and align
 		titleHolder = new VBox();
 		titleHolder.setAlignment(Pos.CENTER);
-		titleHolder.getChildren().addAll(logoImageView, titleLabel, promptLabel);
+		titleHolder.getChildren().addAll(logoImageView, titleLabel, promptLabel, statusLabel);
 				
 		//Create Text Fields
 		Font fieldFont = Font.font("Verdana", 20);
@@ -138,12 +143,19 @@ public class DoctorLoginScreen extends BorderPane {
 						MedicalSystem medSys = MedicalSystem.getInstance();
 						medSys.toDoctorSearch(doctor);
 					}
-					else {System.out.println("Incorrect login information");}
+					else {
+							statusLabel.setText("Incorrect Login Information");
+							statusLabel.setTextFill(Color.RED);
+						}
 				} catch (FileNotFoundException e) {
-					e.printStackTrace();
+					statusLabel.setText("Incorrect Login Information");
+					statusLabel.setTextFill(Color.RED);
 				}
 			}
-			else {System.out.println("Incorrect login information");}
+			else {
+					statusLabel.setText("Incorrect Login Information");
+					statusLabel.setTextFill(Color.RED);
+				}
 		} //End handle
 	} //End subclass
 	

@@ -31,6 +31,7 @@ public class PatientLoginScreen extends BorderPane {
 	private ImageView logoImageView;
 	private Label titleLabel;
 	private Label promptLabel;
+	private Label statusLabel;
 	private TextField firstNameField;
 	private TextField lastNameField;
 	private TextField birthdayField;
@@ -68,10 +69,14 @@ public class PatientLoginScreen extends BorderPane {
 		promptLabel = new Label("Log In");
 		promptLabel.setFont(Font.font("Verdana", FontWeight.BOLD, FontPosture.REGULAR, 28));
 		
+		//Status Text
+		statusLabel = new Label();
+		statusLabel.setFont(Font.font("Verdana", 20));
+		
 		//Place title and prompt into titleHolder and align
 		titleHolder = new VBox();
 		titleHolder.setAlignment(Pos.CENTER);
-		titleHolder.getChildren().addAll(logoImageView, titleLabel, promptLabel);
+		titleHolder.getChildren().addAll(logoImageView, titleLabel, promptLabel, statusLabel);
 		
 		//Create Text Fields
 		Font fieldFont = Font.font("Verdana", 20);
@@ -156,7 +161,8 @@ public class PatientLoginScreen extends BorderPane {
 		@Override
 		public void handle(ActionEvent arg0) {
 			if (firstNameField.getText().isBlank() || lastNameField.getText().isBlank() || birthdayField.getText().isBlank() || passwordField.getText().isBlank()) {
-				System.out.println("Empty field(s).");
+				statusLabel.setText("Could Not Log In: Empty Fields");
+				statusLabel.setTextFill(Color.RED);
 			} else {
 				loginCheckFile = new File("src/assets/Patients/" + firstNameField.getText() + lastNameField.getText() + ".txt");
 				//Checks if user exists
@@ -164,13 +170,12 @@ public class PatientLoginScreen extends BorderPane {
 					try {
 						patientScanner = new Scanner(loginCheckFile);
 					} catch (FileNotFoundException e) {
-						e.printStackTrace();
+						e.printStackTrace(); //This should never be hit
 					}
 					firstName = patientScanner.nextLine();
 					lastName = patientScanner.nextLine();
 					birthday = patientScanner.nextLine();
 					if(firstName.equals(firstNameField.getText()) && lastName.equals(lastNameField.getText()) && birthday.equals(birthdayField.getText()) && patientScanner.nextLine().equals(passwordField.getText())){
-						System.out.println("Logged-In Successfully");
 						
 						loginInfo = new File("src/assets/Patients/" + firstNameField.getText() + lastNameField.getText() + ".txt");
 						
@@ -183,16 +188,22 @@ public class PatientLoginScreen extends BorderPane {
 							medSys = MedicalSystem.getInstance();
 							medSys.toPatientView(loginPatient);
 						} catch (FileNotFoundException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
+							statusLabel.setText("Could Not Log In: System Error");
+							statusLabel.setTextFill(Color.RED);
 						}
 						
 					}
-					else{System.out.println("Incorrect Login Information");}
+					else {
+						statusLabel.setText("Incorrect Login Information");
+						statusLabel.setTextFill(Color.RED);
+					}
 				}
-				else {System.out.println("Incorrect Login Information");}
+				else {
+					statusLabel.setText("Incorrect Login Information");
+					statusLabel.setTextFill(Color.RED);
+
+				}
 				
-				String fullName = firstNameField.getText().concat(lastNameField.getText());
 			}
 			
 			

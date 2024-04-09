@@ -33,6 +33,7 @@ public class CreateAccountScreen extends BorderPane {
 	private ImageView logoImageView;
 	private Label titleLabel;
 	private Label promptLabel;
+	private Label statusLabel;
 	private TextField firstNameField;
 	private TextField lastNameField;
 	private TextField birthdayField;
@@ -67,10 +68,15 @@ public class CreateAccountScreen extends BorderPane {
 		promptLabel = new Label("Create Account");
 		promptLabel.setFont(Font.font("Verdana", FontWeight.BOLD, FontPosture.REGULAR, 28));
 		
+		//Status Text
+		statusLabel = new Label();
+		statusLabel.setFont(Font.font("Verdana", 20));
+		
+		
 		//Place title and prompt into titleHolder and align
 		titleHolder = new VBox();
 		titleHolder.setAlignment(Pos.CENTER);
-		titleHolder.getChildren().addAll(logoImageView, titleLabel, promptLabel);
+		titleHolder.getChildren().addAll(logoImageView, titleLabel, promptLabel, statusLabel);
 		
 		//Create Text Fields
 		Font fieldFont = Font.font("Verdana", 20);
@@ -130,15 +136,20 @@ public class CreateAccountScreen extends BorderPane {
 
 		@Override
 		public void handle(ActionEvent arg0) {
+			if (firstNameField.getText().isBlank() || lastNameField.getText().isBlank() || birthdayField.getText().isBlank() || passwordField.getText().isBlank()) {
+				statusLabel.setText("Account Could Not Be Created: Empty Fields");
+				statusLabel.setTextFill(Color.RED);
+				return;
+			}
 			//Creates new patient directory if not existed
 			newPatientDir = new File("src/assets/Data/Patients/Patient_" + lastNameField.getText() + "_" + firstNameField.getText());
 			if(newPatientDir.exists()) {
-				System.out.println("Patients already exists");
+				System.out.println("Patients already exists"); //DELETE THIS LATER
 			}
 			else
 			{
 				newPatientDir.mkdir();
-				System.out.println("Patient created");
+				System.out.println("Patient created"); //DELETE THIS LATER
 				
 			}
 			
@@ -146,7 +157,8 @@ public class CreateAccountScreen extends BorderPane {
 			patientLoginInfo = new File("src/assets/patients/" + firstNameField.getText() + lastNameField.getText() + ".txt");
 			patientData = new File("src/assets/patientinformation/" + firstNameField.getText() + lastNameField.getText() + ".txt");
 			if(patientLoginInfo.exists()) {
-				System.out.println("Patients login exists");
+				statusLabel.setText("Account Could Not Be Created: Patient Already Exists");
+				statusLabel.setTextFill(Color.RED);
 			}
 			else
 			{
@@ -171,20 +183,14 @@ public class CreateAccountScreen extends BorderPane {
 			    	writer = new FileWriter(patientData);
 			    	writer.write(newPatient.writeInformation());
 			    	writer.close();
-			    	System.out.println("Patient login information saved");
+			    	statusLabel.setText("Account Successfully Created");
+					statusLabel.setTextFill(Color.GREEN);
 			    	
 				} catch (IOException e) {
-					e.printStackTrace();
+					statusLabel.setText("Account Could Not Be Created: File Error");
+					statusLabel.setTextFill(Color.RED);
 				}
 		    	
-				MedicalSystem medSys;
-				try {
-					medSys = MedicalSystem.getInstance();
-					medSys.toPatientLogin();
-				} catch (FileNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
 				
 			}
 
@@ -202,7 +208,6 @@ public class CreateAccountScreen extends BorderPane {
 				try {
 					medSys = MedicalSystem.getInstance();
 				} catch (FileNotFoundException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				medSys.toPatientLogin();
