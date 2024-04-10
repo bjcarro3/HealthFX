@@ -152,39 +152,28 @@ public class DoctorSearchScreen extends BorderPane {
 
 		@Override
 		public void handle(ActionEvent arg0) {
+			if (firstNameField.getText().isBlank() || lastNameField.getText().isBlank() || birthdayField.getText().isBlank()) {
+				System.out.println("Empty field(s)");
+			} else {
+				String fullName = firstNameField.getText() + lastNameField.getText();
+				MedicalSystem medSys;
+				Patient patient;
+				try {
+					medSys = MedicalSystem.getInstance();
+					patient = medSys.getPatient(fullName, birthdayField.getText());
+					if (patient == null) {
+						System.out.println("Patient not found.");
+					} else {
+						medSys.toDoctorPatientInfoScreen(doctor, patient);
+					}
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 			//Checks first and last name via file location
 			patientFile = new File("src/assets/patients/" + firstNameField.getText() + lastNameField.getText() + ".txt");
 			
-			if(patientFile.exists())
-			{
-				try {
-					//Creates the objects to be passed into scene for usage later
-					patientScanner = new Scanner(patientFile);
-					firstName = patientScanner.nextLine();
-					lastName = patientScanner.nextLine();
-					birthday = patientScanner.nextLine();
-				
-				//Checks bithday since first and last names are already checked
-				if(birthday.equals(birthdayField.getText())) {	
-					patientInfo = new PatientInfo();
-					patientHist = new MedHistory();
-					patient = new Patient(firstName, lastName, birthday, patientInfo, patientHist);
-					
-					MedicalSystem medSys = MedicalSystem.getInstance();
-					medSys.toDoctorView(doctor, patient);
-				}
-				else
-				{
-					System.out.println("Patient does not exist");
-				}
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
-				}
-				
-				
-			}
-			else
-			{System.out.println("Patient does not exist");}
 		} //End handle
 	} //End subclass
 	
