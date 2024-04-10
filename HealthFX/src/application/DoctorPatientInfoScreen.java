@@ -89,7 +89,7 @@ public class DoctorPatientInfoScreen extends DoctorView {
 		lastNameLabel = new Label("Last Name:");
 		lastNameLabel.setFont(textFont);
 		
-		lastNameField = new TextField();
+		lastNameField = new TextField(patient.getFirstName());
 		lastNameField.setFont(textFont);
 		lastNameField.setEditable(false);
 		lastNameField.setBackground(new Background(new BackgroundFill(Color.GRAY, CornerRadii.EMPTY, Insets.EMPTY)));
