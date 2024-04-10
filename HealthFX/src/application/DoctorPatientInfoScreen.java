@@ -89,7 +89,7 @@ public class DoctorPatientInfoScreen extends DoctorView {
 		lastNameLabel = new Label("Last Name:");
 		lastNameLabel.setFont(textFont);
 		
-		lastNameField = new TextField(patient.getFirstName());
+		lastNameField = new TextField(patient.getLastName());
 		lastNameField.setFont(textFont);
 		lastNameField.setEditable(false);
 		lastNameField.setBackground(new Background(new BackgroundFill(Color.GRAY, CornerRadii.EMPTY, Insets.EMPTY)));
@@ -220,7 +220,7 @@ public class DoctorPatientInfoScreen extends DoctorView {
 		insuranceLabel = new Label("Insurance Information");
 		insuranceLabel.setFont(textFont);
 		
-		insuranceArea = new TextArea();
+		insuranceArea = new TextArea(patient.getPatientInfo().getInsuranceInfo());
 		insuranceArea.setFont(textFont);
 		insuranceArea.setPrefWidth(300);
 		
@@ -231,13 +231,13 @@ public class DoctorPatientInfoScreen extends DoctorView {
 		pharmacyNameLabel = new Label("Name");
 		pharmacyNameLabel.setFont(textFont);
 		
-		pharmacyNameField = new TextField();
+		pharmacyNameField = new TextField(patient.getPatientInfo().getPharmacyName());
 		pharmacyNameField.setFont(textFont);
 		
 		pharmacyAddressLabel = new Label("Address");
 		pharmacyAddressLabel.setFont(textFont);
 		
-		pharmacyAddressField = new TextField();
+		pharmacyAddressField = new TextField(patient.getPatientInfo().getPharmacyAddress());
 		pharmacyAddressField.setFont(textFont);
 		
 		//Pharmacy Field Aligner
