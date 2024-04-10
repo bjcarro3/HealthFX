@@ -52,7 +52,7 @@ public class MedHistoryScreen extends DoctorView {
 		allergiesLabel = new Label("Allergies-");
 		allergiesLabel.setFont(textFont);
 		
-		allergiesArea = new TextArea();
+		allergiesArea = new TextArea(patient.getMedHistory().getAllergies());
 		allergiesArea.setFont(textFont);
 		allergiesArea.setPrefSize(400, 300);
 		
@@ -63,7 +63,7 @@ public class MedHistoryScreen extends DoctorView {
 		concernsLabel = new Label("Concerns-");
 		concernsLabel.setFont(textFont);
 		
-		concernsArea = new TextArea();
+		concernsArea = new TextArea(patient.getMedHistory().getConcerns());
 		concernsArea.setFont(textFont);
 		concernsArea.setPrefSize(400, 300);
 		
@@ -74,7 +74,7 @@ public class MedHistoryScreen extends DoctorView {
 		healthIssuesLabel = new Label("Health Issues-");
 		healthIssuesLabel.setFont(textFont);
 		
-		healthIssuesArea = new TextArea();
+		healthIssuesArea = new TextArea(patient.getMedHistory().getHealthIssues());
 		healthIssuesArea.setFont(textFont);
 		healthIssuesArea.setPrefSize(400, 300);
 		
@@ -91,7 +91,7 @@ public class MedHistoryScreen extends DoctorView {
 		medicationsLabel = new Label("Medications-");
 		medicationsLabel.setFont(textFont);
 		
-		medicationsArea = new TextArea();
+		medicationsArea = new TextArea(patient.getMedHistory().getMedications());
 		medicationsArea.setFont(textFont);
 		medicationsArea.setPrefSize(400, 200);
 		
@@ -102,7 +102,7 @@ public class MedHistoryScreen extends DoctorView {
 		immunizationsLabel = new Label("Immunizations-");
 		immunizationsLabel.setFont(textFont);
 		
-		immunizationsArea = new TextArea();
+		immunizationsArea = new TextArea(patient.getMedHistory().getImmunizations());
 		immunizationsArea.setFont(textFont);
 		immunizationsArea.setPrefSize(400, 200);
 		

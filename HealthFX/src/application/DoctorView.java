@@ -1,7 +1,12 @@
 package application;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.text.SimpleDateFormat; 
+import java.util.Date; 
 
 //import application.DoctorSearchScreen.MessagesHandler;
 import javafx.event.ActionEvent;
@@ -28,7 +33,7 @@ public class DoctorView extends BorderPane {
 	private Button addVisitButton;
 	private Button contactButton;
 	private Button medHistoryButton;
-	private Button[] visitButtons;
+	private Button[] visitButton;
 	private Button messagesButton;
 	private Button exitButton;
 	private ImageView logoImageView;
@@ -40,6 +45,7 @@ public class DoctorView extends BorderPane {
 	private HBox messageHolder;
 	private HBox imageHolder;
 	private HBox exitHolder;
+	private int numVisit = 0;
 	
 	public DoctorView(Doctor doctor, Patient patient) {
 		this.doctor = doctor;
@@ -66,6 +72,7 @@ public class DoctorView extends BorderPane {
 		nameHolder.setAlignment(Pos.CENTER);
 		nameHolder.setSpacing(20);
 		leftColumn.getChildren().addAll(nameHolder);
+		addVisitButton.setOnAction(new AddVisitHandler());
 		
 		contactButton = new Button("Patient Information");
 		contactButton.setFont(buttonFont);
@@ -81,17 +88,23 @@ public class DoctorView extends BorderPane {
 		leftColumn.getChildren().add(medHistoryHolder);
 		medHistoryButton.setOnAction(new MedicalHistoryHandler());
 		
-		//visitButtons = new Button[numPatient];
-		visitButtons = new Button[3];
+		// find # of visits
+		String fileName = "src/assets/appointments/" + patient.getFirstName() + patient.getLastName();
+		File file = new File(fileName + ".txt");
+		while (file.exists()) {
+			numVisit++;
+			file = new File(fileName + numVisit + ".txt");
+		}
 		
-		for (int i = 0; i < visitButtons.length; i++) {
-			final int index = i + 1;
+		visitButton = new Button[numVisit];
+		
+		for (int i = 0; i < visitButton.length; i++) {
+			final int index = i;
 			
-			visitButtons[i] = new Button("Visit" + (i+1)); //"Patient " + (i+1) + ": " + Patient.name
+			visitButton[i] = new Button("Visit " + (i + 1));
+			visitButton[i].setFont(buttonFont);
 			
-			//Patient patient = null; //patient = patientID or like patient[i]
-			
-			visitButtons[i].setOnAction(event -> {
+			visitButton[i].setOnAction(event -> {
 				MedicalSystem medSys = null;
 				try {
 					medSys = MedicalSystem.getInstance();
@@ -99,23 +112,13 @@ public class DoctorView extends BorderPane {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				//medSys.toDoctorConversationScreen(doctor, patient);
 				medSys.toDoctorVisitScreen(doctor, patient, index);
 			});
-		}
+        }
 		VBox buttonHolder = new VBox();
-		buttonHolder.getChildren().addAll(visitButtons);
+		buttonHolder.getChildren().addAll(visitButton);
 		buttonHolder.setAlignment(Pos.CENTER);
 		leftColumn.getChildren().add(buttonHolder);
-		/*
-		for (int i=0; i<3; i++) {
-			Button visitButton = new Button("Visit " + i);
-			visitButton.setFont(buttonFont);
-			VBox buttonHolder = new VBox(visitButton);
-			buttonHolder.setAlignment(Pos.CENTER);
-			leftColumn.getChildren().add(buttonHolder);
-		}
-		*/	
 				
 		//Right Column
 		rightColumn = new BorderPane();
@@ -214,4 +217,39 @@ public class DoctorView extends BorderPane {
 			medSys.toHomePage();
 		} //End handle
 	} //End subclass
+	
+	private class AddVisitHandler implements EventHandler<ActionEvent> {
+		public void handle(ActionEvent arg0) {
+			MedicalSystem medSys = null;
+			SimpleDateFormat ft = new SimpleDateFormat("MM/dd/yyyy");
+			String currentDate = ft.format(new Date()); 
+			String fileName;
+			if (numVisit == 0) {
+				fileName = "src/assets/appointments/" + patient.getFirstName() + patient.getLastName() + ".txt";
+			} else {
+				fileName = "src/assets/appointments/" + patient.getFirstName() + patient.getLastName() + Integer.toString(numVisit) + ".txt";
+			}
+			numVisit++;
+			File file = new File(fileName);
+			try {
+	    		// Creates new patient file and writes the login info
+	    		PrintWriter pw = new PrintWriter(file);
+	    		pw.println(currentDate);
+	    		pw.close();
+		    	
+			} catch (IOException e) {
+				System.out.println("Account Could Not Be Created: File Error");
+			}
+			
+			try {
+				medSys = MedicalSystem.getInstance();
+				medSys.toDoctorVisitScreen(doctor, patient, numVisit-1);
+				
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+	}
 }

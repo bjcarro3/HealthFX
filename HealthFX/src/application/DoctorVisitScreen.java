@@ -54,10 +54,20 @@ public class DoctorVisitScreen extends DoctorView {
 		//Fonts
 		Font titleFont = Font.font("Verdana", 25);
 		Font textFont = Font.font("Verdana", 15);
-				
+			
+		MedicalSystem medSys = null;
+		Appointment visit = null;
+		try {
+			medSys = MedicalSystem.getInstance();
+			visit = medSys.getAppointment(patient.getFirstName() + patient.getLastName(), index);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		//Left Side
 		//title
-		String VisitLabel = "Visit "  + index + "-" + index + index + "-" + index + index + index + index;
+		String VisitLabel = "Visit "  + visit.getDate();
 		titleLabel = new Label(VisitLabel);
 		titleLabel.setFont(titleFont);
 		
@@ -70,7 +80,7 @@ public class DoctorVisitScreen extends DoctorView {
 		weightLabel = new Label("Weight:");
 		weightLabel.setFont(textFont);
 		
-		weightField = new TextField();
+		weightField = new TextField(Float.toString(visit.getWeight()));
 		weightField.setFont(textFont);
 		weightField.setPrefWidth(100);
 		
@@ -78,7 +88,7 @@ public class DoctorVisitScreen extends DoctorView {
 		heightLabel = new Label("Height:");
 		heightLabel.setFont(textFont);
 		
-		heightField = new TextField();
+		heightField = new TextField(Float.toString(visit.getHeight()));
 		heightField.setFont(textFont);
 		heightField.setPrefWidth(100);
 		
@@ -86,7 +96,7 @@ public class DoctorVisitScreen extends DoctorView {
 		tempLabel = new Label("Temperature:");
 		tempLabel.setFont(textFont);
 		
-		tempField = new TextField();
+		tempField = new TextField(Float.toString(visit.getTemperature()));
 		tempField.setFont(textFont);
 		tempField.setPrefWidth(100);
 		
@@ -94,7 +104,7 @@ public class DoctorVisitScreen extends DoctorView {
 		bpLabel = new Label("Blood Pressure:");
 		bpLabel.setFont(textFont);
 		
-		bpField = new TextField();
+		bpField = new TextField(visit.getBp());
 		bpField.setFont(textFont);
 		bpField.setPrefWidth(100);
 				
@@ -117,7 +127,7 @@ public class DoctorVisitScreen extends DoctorView {
 		examResultsLabel = new Label("Examination Results-");
 		examResultsLabel.setFont(textFont);
 		
-		examResultsArea = new TextArea();
+		examResultsArea = new TextArea(visit.getExamResults());
 		examResultsArea.setFont(textFont);
 		examResultsArea.setPrefSize(400, 300);
 		
@@ -135,7 +145,7 @@ public class DoctorVisitScreen extends DoctorView {
 		prescriptionLabel = new Label("New Prescriptions-");
 		prescriptionLabel.setFont(textFont);
 		
-		prescriptionArea = new TextArea();
+		prescriptionArea = new TextArea(visit.getPrescriptions());
 		prescriptionArea.setFont(textFont);
 		prescriptionArea.setPrefSize(400, 200);
 		
@@ -152,7 +162,7 @@ public class DoctorVisitScreen extends DoctorView {
 		recommendationsLabel = new Label("Recommendation-");
 		recommendationsLabel.setFont(textFont);
 		
-		recommendationsArea = new TextArea();
+		recommendationsArea = new TextArea(visit.getRecommendations());
 		recommendationsArea.setFont(textFont);
 		recommendationsArea.setPrefSize(400, 200);
 		

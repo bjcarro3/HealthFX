@@ -164,7 +164,7 @@ public class DoctorSearchScreen extends BorderPane {
 					if (patient == null) {
 						System.out.println("Patient not found.");
 					} else {
-						medSys.toDoctorPatientInfoScreen(doctor, patient);
+						medSys.toDoctorView(doctor, patient);
 					}
 				} catch (FileNotFoundException e) {
 					// TODO Auto-generated catch block
