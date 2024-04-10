@@ -57,7 +57,7 @@ public class DoctorView extends BorderPane {
 		leftColumn.setPadding(new Insets(10, 10, 10 ,10));
 		
 		//patientName = new Label(patient.getFirstName() + " " + patient.getLastName());
-		patientName = new Label("John Smith");
+		patientName = new Label(patient.getFirstName() + " " + patient.getLastName());
 		patientName.setFont(nameFont);
 		addVisitButton = new Button("+");
 		addVisitButton.setFont(addFont);
@@ -159,7 +159,6 @@ public class DoctorView extends BorderPane {
 
 		@Override
 		public void handle(ActionEvent arg0) {
-			Patient patient= null;
 			MedicalSystem medSys = null;
 			try {
 				medSys = MedicalSystem.getInstance();

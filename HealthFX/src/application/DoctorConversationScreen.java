@@ -62,20 +62,20 @@ public class DoctorConversationScreen extends BorderPane {
 		//Main Body
 		//Info Holder
 		//Patient Name
-		patientNameLabel = new Label("John Smith");
+		patientNameLabel = new Label(patient.getFirstName() + " " + patient.getLastName());
 		patientNameLabel.setFont(titleFont);
 		
-		String patientPhoneLabelString = "Phone: " +index+index+index+ "-" +index+index+index+ "-TEST";
+		String patientPhoneLabelString = "Phone: " + patient.getPatientInfo().getPhoneNumber();
 		patientPhoneLabel = new Label(patientPhoneLabelString);
 		patientPhoneLabel.setFont(textFont);
 		
-		emergencyNameLabel = new Label("Emergency Contact: PERSON SMITH");
+		emergencyNameLabel = new Label("Emergency Contact: " + patient.getPatientInfo().getEmergencyName());
 		emergencyNameLabel.setFont(textFont);
 		
-		guardianPhoneLabel = new Label("Guardian Phone: 111-111-TEST");
+		guardianPhoneLabel = new Label("Guardian Phone: " + patient.getPatientInfo().getGuardianPhone());
 		guardianPhoneLabel.setFont(textFont);
 		
-		emergencyPhoneLabel = new Label("Contact's Phone: 111-111-TEST");
+		emergencyPhoneLabel = new Label("Contact's Phone: " + patient.getPatientInfo().getEmergencyPhone());
 		emergencyPhoneLabel.setFont(textFont);
 		
 		//Set up info holder
@@ -95,7 +95,7 @@ public class DoctorConversationScreen extends BorderPane {
 		
 		//Send Area
 		//Sender Name
-		senderNameLabel = new Label("DOCTOR NAME:");
+		senderNameLabel = new Label("Dr. " + doctor.getName());
 		senderNameLabel.setFont(textFont);
 		
 		//Sender Text Field
@@ -160,11 +160,23 @@ public class DoctorConversationScreen extends BorderPane {
 		this.setRight(rightColumn);
 	}
 	
+	private void displayMessages() {
+		messageArea.clear();
+		for (String message : patient.getConversation().getMessages()) {
+			messageArea.appendText(message + "\n");
+		}
+	}
+	
 	private class SendHandler implements EventHandler<ActionEvent> {
 
 		@Override
 		public void handle(ActionEvent arg0) {
-			sendArea.setText("");
+			if(!sendArea.getText().isBlank()) {
+				patient.getConversation().addMessage(
+						"Dr. " + doctor.getName() + ": ");
+				sendArea.setText(""); //Clear text field
+				displayMessages();
+			}
 		} //End handle
 	} //End subclass
 	

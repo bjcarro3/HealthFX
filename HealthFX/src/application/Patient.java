@@ -9,7 +9,6 @@ public class Patient {
 	private PatientInfo patientInfo;
 	private MedHistory medHistory;
 	private Conversation conversation;
-	private ArrayList<Appointment> appointments;
 	
 	public Patient(String firstName, String lastName, String birthday, PatientInfo patientInfo, MedHistory medHistory) {
 		this.firstName = firstName;
@@ -17,6 +16,7 @@ public class Patient {
 		this.birthday = birthday;
 		this.patientInfo = patientInfo;
 		this.medHistory = medHistory;
+		this.conversation = new Conversation(new ArrayList<String>());
 	}
 	
 	//Write the patient info
@@ -51,10 +51,6 @@ public class Patient {
 
 	public Conversation getConversation() {
 		return conversation;
-	}
-
-	public ArrayList<Appointment> getAppointments() {
-		return appointments;
 	}
 	
 }

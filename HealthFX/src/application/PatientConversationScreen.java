@@ -64,7 +64,7 @@ public class PatientConversationScreen extends BorderPane {
 		
 		//Send Area
 		//Sender Name
-		senderNameLabel = new Label("John Smith:");
+		senderNameLabel = new Label(patient.getFirstName() + " " + patient.getLastName() + ":");
 		senderNameLabel.setFont(textFont);
 		
 		//Sender Text Field
@@ -123,17 +123,28 @@ public class PatientConversationScreen extends BorderPane {
 		logoutHolder.setAlignment(Pos.CENTER);
 		rightColumn.setBottom(logoutHolder);
 		logoutButton.setOnAction(new LogOutHandler());
-						
 		
 		this.setCenter(bodyHolder);
 		this.setRight(rightColumn);
+	}
+	
+	private void displayMessages() {
+		messageArea.clear();
+		for (String message : patient.getConversation().getMessages()) {
+			messageArea.appendText(message + "\n");
+		}
 	}
 	
 	private class SendHandler implements EventHandler<ActionEvent> {
 
 		@Override
 		public void handle(ActionEvent arg0) {
-			sendArea.setText(""); //currently I have it so it just clears out the text field
+			if(!sendArea.getText().isBlank()) {
+				patient.getConversation().addMessage(
+						patient.getFirstName() + " " + patient.getLastName() + ": " + sendArea.getText());
+				sendArea.setText(""); //Clear text field
+				displayMessages();
+			}
 		} //End handle
 	} //End subclass
 	
