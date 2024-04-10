@@ -82,13 +82,7 @@ public class PatientView extends BorderPane {
 			visitButton[i].setFont(buttonFont);
 			
 			visitButton[i].setOnAction(event -> {
-				MedicalSystem medSys = null;
-				try {
-					medSys = MedicalSystem.getInstance();
-				} catch (FileNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				MedicalSystem medSys = MedicalSystem.getInstance();
 				savePatient();
 				medSys.toPatientVisitScreen(patient, index);
 			});
@@ -141,13 +135,7 @@ public class PatientView extends BorderPane {
 
 		@Override
 		public void handle(ActionEvent arg0) {
-			MedicalSystem medSys = null;
-			try {
-				medSys = MedicalSystem.getInstance();
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			MedicalSystem medSys = MedicalSystem.getInstance();
 			savePatient();
 			medSys.toPatientInfoScreen(patient);
 		} //End handle
@@ -157,26 +145,14 @@ public class PatientView extends BorderPane {
 
 		@Override
 		public void handle(ActionEvent arg0) {
-			MedicalSystem medSys = null;
-			try {
-				medSys = MedicalSystem.getInstance();
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			MedicalSystem medSys = MedicalSystem.getInstance();
 			savePatient();
 			medSys.toPatientMessageScreen(patient);
 		} //End handle
 	} //End subclass
 	
 	protected void savePatient() {
-		MedicalSystem medSys = null;
-		try {
-			medSys = MedicalSystem.getInstance();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		MedicalSystem medSys = MedicalSystem.getInstance();
 		try {
 			medSys.savePatientInfo(patient);
 		} catch (FileNotFoundException e) {
@@ -188,12 +164,7 @@ public class PatientView extends BorderPane {
 
 		@Override
 		public void handle(ActionEvent arg0) {
-			MedicalSystem medSys = null;
-			try {
-				medSys = MedicalSystem.getInstance();
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			}
+			MedicalSystem medSys = MedicalSystem.getInstance();
 			try {
 				medSys.savePatientInfo(patient);
 			} catch (FileNotFoundException e) {

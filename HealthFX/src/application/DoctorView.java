@@ -104,13 +104,7 @@ public class DoctorView extends BorderPane {
 			visitButton[i].setFont(buttonFont);
 			
 			visitButton[i].setOnAction(event -> {
-				MedicalSystem medSys = null;
-				try {
-					medSys = MedicalSystem.getInstance();
-				} catch (FileNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				MedicalSystem medSys = MedicalSystem.getInstance();
 				savePatient();
 				medSys.toDoctorVisitScreen(doctor, patient, index);
 			});
@@ -159,13 +153,7 @@ public class DoctorView extends BorderPane {
 	}
 	
 	protected void savePatient() {
-		MedicalSystem medSys = null;
-		try {
-			medSys = MedicalSystem.getInstance();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		MedicalSystem medSys = MedicalSystem.getInstance();
 		try {
 			medSys.savePatientInfo(patient);
 			medSys.saveMedicalHistory(patient);
@@ -178,13 +166,7 @@ public class DoctorView extends BorderPane {
 
 		@Override
 		public void handle(ActionEvent arg0) {
-			MedicalSystem medSys = null;
-			try {
-				medSys = MedicalSystem.getInstance();
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			MedicalSystem medSys = MedicalSystem.getInstance();
 			savePatient();
 			medSys.toDoctorPatientInfoScreen(doctor, patient);
 		} //End handle
@@ -194,13 +176,7 @@ public class DoctorView extends BorderPane {
 
 		@Override
 		public void handle(ActionEvent arg0) {
-			MedicalSystem medSys = null;
-			try {
-				medSys = MedicalSystem.getInstance();
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			MedicalSystem medSys = MedicalSystem.getInstance();
 			savePatient();
 			medSys.toMedHistoryScreen(doctor, patient);
 		} //End handle
@@ -210,13 +186,7 @@ public class DoctorView extends BorderPane {
 
 		@Override
 		public void handle(ActionEvent arg0) {
-			MedicalSystem medSys = null;
-			try {
-				medSys = MedicalSystem.getInstance();
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			MedicalSystem medSys = MedicalSystem.getInstance();
 			savePatient();
 			medSys.toDoctorInboxScreen(doctor);
 		} //End handle
@@ -226,13 +196,7 @@ public class DoctorView extends BorderPane {
 
 		@Override
 		public void handle(ActionEvent arg0) {
-			MedicalSystem medSys = null;
-			try {
-				medSys = MedicalSystem.getInstance();
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			MedicalSystem medSys = MedicalSystem.getInstance();
 			savePatient();
 			medSys.toHomePage();
 		} //End handle
@@ -260,15 +224,8 @@ public class DoctorView extends BorderPane {
 			} catch (IOException e) {
 				System.out.println("Account Could Not Be Created: File Error");
 			}
-			
-			try {
-				medSys = MedicalSystem.getInstance();
-				medSys.toDoctorVisitScreen(doctor, patient, numVisit-1);
-				
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			medSys = MedicalSystem.getInstance();
+			medSys.toDoctorVisitScreen(doctor, patient, numVisit-1);
 			
 		}
 	}

@@ -146,13 +146,7 @@ public class PatientLoginScreen extends BorderPane {
 
 		@Override
 		public void handle(ActionEvent arg0) {
-			MedicalSystem medSys = null;
-			try {
-				medSys = MedicalSystem.getInstance();
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			MedicalSystem medSys = MedicalSystem.getInstance();
 			medSys.toCreateAccount();
 		} //End handle
 	} //End subclass
@@ -235,13 +229,7 @@ public class PatientLoginScreen extends BorderPane {
 
 		@Override
 		public void handle(ActionEvent arg0) {
-			MedicalSystem medSys = null;
-			try {
-				medSys = MedicalSystem.getInstance();
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			MedicalSystem medSys = MedicalSystem.getInstance();
 			medSys.toHomePage();
 		} //End handle
 	} //End subclass

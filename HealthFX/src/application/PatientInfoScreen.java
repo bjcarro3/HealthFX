@@ -207,13 +207,7 @@ public class PatientInfoScreen extends PatientView {
 		pInfo.setGuardianPhone(guardianPhoneField.getText());
 		pInfo.setEmergencyName(emergencyNameField.getText());
 		pInfo.setEmergencyPhone(emergencyPhoneField.getText());
-		MedicalSystem medSys = null;
-		try {
-			medSys = MedicalSystem.getInstance();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		MedicalSystem medSys = MedicalSystem.getInstance();
 		try {
 			medSys.savePatientInfo(patient);
 		} catch (FileNotFoundException e) {

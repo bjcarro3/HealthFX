@@ -182,12 +182,7 @@ public class CreateAccountScreen extends BorderPane {
 
 			@Override
 			public void handle(ActionEvent arg0) {
-				MedicalSystem medSys = null;
-				try {
-					medSys = MedicalSystem.getInstance();
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
-				}
+				MedicalSystem medSys = MedicalSystem.getInstance();
 				medSys.toPatientLogin();
 			} //End handle
 		} //End subclass

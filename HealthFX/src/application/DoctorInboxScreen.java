@@ -202,13 +202,7 @@ public class DoctorInboxScreen extends BorderPane {
 
 	        @Override
 	        public void handle(ActionEvent event) {
-	            MedicalSystem medSys = null;
-				try {
-					medSys = MedicalSystem.getInstance();
-				} catch (FileNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+	            MedicalSystem medSys = MedicalSystem.getInstance();
 	            medSys.toDoctorSearch(doctor);	//Currently, clicking closeButton redirects to HomePage... FIX
 	        }
 	    }
@@ -218,13 +212,7 @@ public class DoctorInboxScreen extends BorderPane {
 
 	        @Override
 	        public void handle(ActionEvent event) {
-	        	MedicalSystem medSys = null;
-				try {
-					medSys = MedicalSystem.getInstance();
-				} catch (FileNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+	        	MedicalSystem medSys = MedicalSystem.getInstance();
 	            medSys.toHomePage();	
 	        }
 	    }

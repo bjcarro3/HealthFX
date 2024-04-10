@@ -283,13 +283,7 @@ public class DoctorPatientInfoScreen extends DoctorView {
 		pInfo.setInsuranceInfo(insuranceArea.getText());
 		pInfo.setPharmacyName(pharmacyNameField.getText());
 		pInfo.setPharmacyAddress(pharmacyAddressField.getText());
-		MedicalSystem medSys = null;
-		try {
-			medSys = MedicalSystem.getInstance();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		MedicalSystem medSys = MedicalSystem.getInstance();
 		try {
 			medSys.savePatientInfo(patient);
 		} catch (FileNotFoundException e) {

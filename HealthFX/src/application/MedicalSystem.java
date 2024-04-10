@@ -12,21 +12,11 @@ public class MedicalSystem {
 	private Scene scene;
 	public ArrayList<String> allPatients = new ArrayList<>();
 	
-	private MedicalSystem() throws FileNotFoundException {
-		// instantiate all Patients
-		String fileName = "src/assets/PatientList.txt";
-		File file = new File(fileName);
-        Scanner scan = new Scanner(file);
-        while (scan.hasNext()) {
-        	String line = scan.nextLine();
-        	if (line == "")
-        		break;
-        	allPatients.add(line);
-        }
-        scan.close();
+	private MedicalSystem() {
+
 	}
 	
-	public static MedicalSystem getInstance() throws FileNotFoundException {
+	public static MedicalSystem getInstance() {
 		if(instance != null) {
 			return instance;
 		}

@@ -131,13 +131,7 @@ public class MedHistoryScreen extends DoctorView {
 		medHistory.setHealthIssues(healthIssuesArea.getText());
 		medHistory.setMedications(medicationsArea.getText());
 		medHistory.setImmunizations(immunizationsArea.getText());
-		MedicalSystem medSys = null;
-		try {
-			medSys = MedicalSystem.getInstance();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		MedicalSystem medSys = MedicalSystem.getInstance();
 		try {
 			medSys.saveMedicalHistory(patient);
 		} catch (FileNotFoundException e) {

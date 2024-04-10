@@ -81,13 +81,7 @@ public class HomePageScreen extends VBox{
 
 		@Override
 		public void handle(ActionEvent arg0) {
-			MedicalSystem medSys = null;
-			try {
-				medSys = MedicalSystem.getInstance();
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			MedicalSystem medSys = MedicalSystem.getInstance();
 			medSys.toPatientLogin();
 		} //End handle
 	} //End subclass
@@ -97,13 +91,7 @@ public class HomePageScreen extends VBox{
 
 		@Override
 		public void handle(ActionEvent arg0) {
-			MedicalSystem medSys = null;
-			try {
-				medSys = MedicalSystem.getInstance();
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			MedicalSystem medSys = MedicalSystem.getInstance();
 			medSys.toDoctorLogin();
 		} //End handle
 	} //End subclass

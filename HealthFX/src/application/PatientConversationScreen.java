@@ -48,16 +48,9 @@ public class PatientConversationScreen extends BorderPane {
 	
 	public PatientConversationScreen(Patient patient) {
 		this.patient = patient;
-		try {
-			MedicalSystem medSys;
-			medSys = MedicalSystem.getInstance();
-			medSys.getConversation((patient.getFirstName() + patient.getLastName()));
-			patient.setConversation(medSys.getConversation((patient.getFirstName() + patient.getLastName())));
-			
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		MedicalSystem medSys = MedicalSystem.getInstance();
+		medSys.getConversation((patient.getFirstName() + patient.getLastName()));
+		patient.setConversation(medSys.getConversation((patient.getFirstName() + patient.getLastName())));
 		
 		
 		Font titleFont = Font.font("Verdana", 25);
@@ -157,14 +150,8 @@ public class PatientConversationScreen extends BorderPane {
 						patient.getFirstName() + " " + patient.getLastName() + ": " + sendArea.getText());
 				sendArea.setText(""); //Clear text field
 				displayMessages();
-				MedicalSystem medSys;
-				try {
-					medSys = MedicalSystem.getInstance();
-					medSys.saveConversation((patient.getFirstName() + patient.getLastName()), patient.getConversation());
-				} catch (FileNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				MedicalSystem medSys = MedicalSystem.getInstance();
+				medSys.saveConversation((patient.getFirstName() + patient.getLastName()), patient.getConversation());
 				
 			}
 		} //End handle
@@ -174,13 +161,7 @@ public class PatientConversationScreen extends BorderPane {
 
 		@Override
 		public void handle(ActionEvent arg0) {
-			MedicalSystem medSys = null;
-			try {
-				medSys = MedicalSystem.getInstance();
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			MedicalSystem medSys = MedicalSystem.getInstance();
 			medSys.toPatientInfoScreen(patient);
 		} //End handle
 	} //End subclass
@@ -189,13 +170,7 @@ public class PatientConversationScreen extends BorderPane {
 
 		@Override
 		public void handle(ActionEvent arg0) {
-			MedicalSystem medSys = null;
-			try {
-				medSys = MedicalSystem.getInstance();
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			MedicalSystem medSys = MedicalSystem.getInstance();
 			medSys.toHomePage();
 		} //End handle
 	} //End subclass
