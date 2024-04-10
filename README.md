@@ -46,6 +46,5 @@ This is Matthew. I am going to put a little note here that demonstrates how each
     - temp   (float)
     - blood pressure
     - new prescriptions
-    - exam results
+    - exam results (exam summary)
     - recommendations
-    - Every line afterwards until an empty line/EOF will be visit summary.
