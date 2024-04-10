@@ -1,5 +1,7 @@
 package application;
 
+import java.io.FileNotFoundException;
+
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -21,12 +23,24 @@ public class PatientVisitScreen extends PatientView {
 		Font titleFont = Font.font("Verdana", 25);
 		Font summaryFont = Font.font("Verdana", 15);
 		
-		String VisitLabel = "Visit "  + index + "-" + index + index + "-" + index + index + index + index;
+		MedicalSystem medSys = null;
+		Appointment visit = null;
+		try {
+			medSys = MedicalSystem.getInstance();
+			visit = medSys.getAppointment(patient.getFirstName() + patient.getLastName(), index);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+		String VisitLabel = "Visit "  + visit.getDate();
 		
 		visitTitle = new Label(VisitLabel);
 		visitTitle.setFont(titleFont);
 		
-		visitText = new TextArea("KJSAFKLAJSFLFSKASFJKLS");
+		visitText = new TextArea(visit.getExamResults());
 		visitText.setEditable(false);
 		visitText.setFont(summaryFont);
 		visitText.setPrefHeight(1080);
