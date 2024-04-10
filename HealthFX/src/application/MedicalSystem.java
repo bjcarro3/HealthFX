@@ -272,4 +272,38 @@ public class MedicalSystem {
 		
 		return pApt;
 	}
+	
+	public Conversation getConversation(String fullName)
+	{
+		ArrayList<String> Messages = new ArrayList<String>();
+		Conversation returnedConvo = new Conversation(Messages);
+		File convoFile = new File("src/assets/conversations/" + fullName + ".txt");
+		Scanner scanConvo;
+		try {
+			scanConvo = new Scanner(convoFile);
+			String nextMessage = scanConvo.nextLine();
+			nextMessage = scanConvo.nextLine();
+			
+			while(!(nextMessage.equals("")) || !(nextMessage.equals(null))){
+				returnedConvo.addMessage(nextMessage);
+				nextMessage = scanConvo.nextLine();
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		return returnedConvo;
+	}
+	
+	public void saveConversation(String fullName, Conversation saved) {
+		File convoFile = new File("src/assets/conversations/" + fullName + ".txt");
+		try {
+			FileWriter writer = new FileWriter(convoFile);
+			for(int i = 0; i < saved.getMessages().size(); i++) {
+				writer.write(saved.getMessages().get(i) + "\n");
+			}
+			writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+}
 }
