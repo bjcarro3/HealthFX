@@ -38,6 +38,7 @@ This is Matthew. I am going to put a little note here that demonstrates how each
 
 **appointments**
 - File name: FirstLastname.txt
+    - Every proceeding appointment will be labeled FirstLastname#.txt, where # is an int starting at 1 incrementing upwards
 - Contents of each by line:
     - Date (mm/dd/yyyy)
     - height (float)
