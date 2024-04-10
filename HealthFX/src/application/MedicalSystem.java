@@ -310,14 +310,22 @@ public class MedicalSystem {
 		Conversation returnedConvo = new Conversation(Messages);
 		File convoFile = new File("src/assets/conversations/" + fullName + ".txt");
 		Scanner scanConvo;
+		if(!convoFile.exists())
+		{
+			try {
+				convoFile.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
 		try {
 			scanConvo = new Scanner(convoFile);
-			String nextMessage = scanConvo.nextLine();
-			nextMessage = scanConvo.nextLine();
+			String nextMessage;
 			
-			while(!(nextMessage.equals("")) || !(nextMessage.equals(null))){
-				returnedConvo.addMessage(nextMessage);
+			while(scanConvo.hasNextLine()){
 				nextMessage = scanConvo.nextLine();
+				returnedConvo.addMessage(nextMessage);			
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -327,6 +335,14 @@ public class MedicalSystem {
 	
 	public void saveConversation(String fullName, Conversation saved) {
 		File convoFile = new File("src/assets/conversations/" + fullName + ".txt");
+		if(!convoFile.exists())
+		{
+			try {
+				convoFile.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 		try {
 			FileWriter writer = new FileWriter(convoFile);
 			for(int i = 0; i < saved.getMessages().size(); i++) {
@@ -336,10 +352,7 @@ public class MedicalSystem {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-<<<<<<< HEAD
-=======
-}
->>>>>>> refs/remotes/origin/master
+
 }
 }
 

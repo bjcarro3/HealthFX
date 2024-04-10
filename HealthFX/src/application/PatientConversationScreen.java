@@ -48,6 +48,18 @@ public class PatientConversationScreen extends BorderPane {
 	
 	public PatientConversationScreen(Patient patient) {
 		this.patient = patient;
+		try {
+			MedicalSystem medSys;
+			medSys = MedicalSystem.getInstance();
+			medSys.getConversation((patient.getFirstName() + patient.getLastName()));
+			patient.setConversation(medSys.getConversation((patient.getFirstName() + patient.getLastName())));
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 		Font titleFont = Font.font("Verdana", 25);
 		Font textFont = Font.font("Verdana", 15);
 		Font buttonFont = Font.font("Verdana", 12);
@@ -61,6 +73,7 @@ public class PatientConversationScreen extends BorderPane {
 		messageArea.setFont(textFont);
 		messageArea.setEditable(false);
 		messageArea.setPrefHeight(500);
+		displayMessages();
 		
 		//Send Area
 		//Sender Name
@@ -137,13 +150,22 @@ public class PatientConversationScreen extends BorderPane {
 	
 	private class SendHandler implements EventHandler<ActionEvent> {
 
-		@Override
+		@SuppressWarnings("null")
 		public void handle(ActionEvent arg0) {
 			if(!sendArea.getText().isBlank()) {
 				patient.getConversation().addMessage(
 						patient.getFirstName() + " " + patient.getLastName() + ": " + sendArea.getText());
 				sendArea.setText(""); //Clear text field
 				displayMessages();
+				MedicalSystem medSys;
+				try {
+					medSys = MedicalSystem.getInstance();
+					medSys.saveConversation((patient.getFirstName() + patient.getLastName()), patient.getConversation());
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 			}
 		} //End handle
 	} //End subclass

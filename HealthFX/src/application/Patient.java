@@ -1,6 +1,5 @@
 package application;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class Patient {
@@ -52,6 +51,10 @@ public class Patient {
 
 	public Conversation getConversation() {
 		return conversation;
+	}
+	
+	public void setConversation(Conversation update) {
+		this.conversation = update;
 	}
 	
 }

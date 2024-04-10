@@ -1,6 +1,8 @@
 package application;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FilenameFilter;
 import java.util.ArrayList;
 
 import javafx.event.ActionEvent;
@@ -39,6 +41,7 @@ public class DoctorInboxScreen extends BorderPane {
 	private HBox imageHolder;
 	private HBox logoutHolder;
 	
+	private File files;
 	
 	public DoctorInboxScreen(Doctor doctor) {
 		this.doctor = doctor;
@@ -62,6 +65,7 @@ public class DoctorInboxScreen extends BorderPane {
 		
 		for (int i = 0; i < messageList.length; i++) {
 			final int index = i;
+			File[] files = new File("src/assets/conversations").listFiles();
 			
 			messageList[i] = new Button("Patient" + (i+1)); //"Patient " + (i+1) + ": " + Patient.name
 			
