@@ -336,10 +336,7 @@ public class MedicalSystem {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-<<<<<<< HEAD
-=======
-}
->>>>>>> refs/remotes/origin/master
+
 }
 }
 
