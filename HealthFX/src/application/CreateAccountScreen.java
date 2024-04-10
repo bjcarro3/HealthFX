@@ -107,6 +107,7 @@ public class CreateAccountScreen extends BorderPane {
 		createAccountButton.setPrefWidth(210);
 		createAccountButton.setPrefHeight(50);
 		createAccountButton.setFont(buttonFont);
+		createAccountButton.setDisable(false);
 		createAccountButton.setOnAction(new CreateAccountHandler());
 		
 		//Holder for all inputs
