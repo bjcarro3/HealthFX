@@ -1,12 +1,8 @@
 package application;
 
-import java.io.File;
+
 import java.io.FileNotFoundException;
-<<<<<<< HEAD
-import java.io.FilenameFilter;
-=======
 import java.io.File;
->>>>>>> branch 'master' of https://github.com/bjcarro3/HealthFX.git
 import java.util.ArrayList;
 import java.util.Scanner;
 
