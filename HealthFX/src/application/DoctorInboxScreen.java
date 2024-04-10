@@ -19,6 +19,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
+/* added lines 46, 106 - 143... debugging necessary*/
+
+
 public class DoctorInboxScreen extends BorderPane {
 	private Doctor doctor;
 	
@@ -98,8 +101,7 @@ public class DoctorInboxScreen extends BorderPane {
 		
 		this.setCenter(bodyHolder);
 		this.setRight(rightColumn);
-	}
-	/* added lines 101 - 140... debugging necessary*/ 
+	} 
 	
 	 private void setupEventHandlers() {
 	        closeButton.setOnAction(new BackHandler());
