@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -141,50 +142,26 @@ public class CreateAccountScreen extends BorderPane {
 				statusLabel.setTextFill(Color.RED);
 				return;
 			}
-			//Creates new patient directory if not existed
-			newPatientDir = new File("src/assets/Data/Patients/Patient_" + lastNameField.getText() + "_" + firstNameField.getText());
-			if(newPatientDir.exists()) {
-				System.out.println("Patients already exists"); //DELETE THIS LATER
-			}
-			else
-			{
-				newPatientDir.mkdir();
-				System.out.println("Patient created"); //DELETE THIS LATER
-				
-			}
 			
-			//Checks if file exists in I/O
+			//Checks if info for patient already exists
 			patientLoginInfo = new File("src/assets/patients/" + firstNameField.getText() + lastNameField.getText() + ".txt");
-			patientData = new File("src/assets/patientinformation/" + firstNameField.getText() + lastNameField.getText() + ".txt");
 			if(patientLoginInfo.exists()) {
 				statusLabel.setText("Account Could Not Be Created: Patient Already Exists");
 				statusLabel.setTextFill(Color.RED);
-			}
-			else
-			{
+			} else {
 		    //Writes the information to the new file and creates new file if not existed
 		    	try {
-		    		//Creates new patient login and info files
-		    		patientLoginInfo.createNewFile();
-		    		patientData.createNewFile();
-		    		
-		    		//Write login
-		    		writer = new FileWriter(patientLoginInfo);
-					writer.write(firstNameField.getText() + "\n" + lastNameField.getText() + "\n" + birthdayField.getText() + "\n" + passwordField.getText());
-			    	writer.close();
+		    		// Creates new patient file and writes the login info
+		    		PrintWriter pw = new PrintWriter(patientLoginInfo);
+		    		pw.println(firstNameField.getText());
+		    		pw.println(lastNameField.getText());
+		    		pw.println(birthdayField.getText());
+		    		pw.println(passwordField.getText());
+		    		pw.close();
 			    	
-			    	
-			    	newPatientInfo = new PatientInfo();
-			    	newMedHistory = new MedHistory();
-			    	
-			    	newPatient = new Patient(firstNameField.getText(), lastNameField.getText(), birthdayField.getText(), newPatientInfo, newMedHistory);
-			    	
-			    	//Write Patient info
-			    	writer = new FileWriter(patientData);
-			    	writer.write(newPatient.writeInformation());
-			    	writer.close();
 			    	statusLabel.setText("Account Successfully Created");
 					statusLabel.setTextFill(Color.GREEN);
+					createAccountButton.setDisable(true);
 			    	
 				} catch (IOException e) {
 					statusLabel.setText("Account Could Not Be Created: File Error");

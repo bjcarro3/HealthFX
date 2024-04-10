@@ -129,31 +129,36 @@ public class MedicalSystem {
 		PatientInfo pInfo = new PatientInfo();
 		fileName = "src/assets/patientinformation/" + fullName + ".txt";
 		file = new File(fileName);
-		scan = new Scanner(file);
-		pInfo.setSex(scan.nextLine());
-		pInfo.setAddress(scan.nextLine());
-		pInfo.setPhoneNumber(scan.nextLine());
-		pInfo.setEmail(scan.nextLine());
-		pInfo.setGuardianName(scan.nextLine());
-		pInfo.setGuardianEmail(scan.nextLine());
-		pInfo.setGuardianPhone(scan.nextLine());
-		pInfo.setEmergencyName(scan.nextLine());
-		pInfo.setEmergencyPhone(scan.nextLine());
-		pInfo.setInsuranceInfo(scan.nextLine());
-		pInfo.setPharmacyName(scan.nextLine());
-		pInfo.setPharmacyAddress(scan.nextLine());
-		scan.close();
+		if (file.exists()) {
+			scan = new Scanner(file);
+			pInfo.setSex(scan.nextLine());
+			pInfo.setAddress(scan.nextLine());
+			pInfo.setPhoneNumber(scan.nextLine());
+			pInfo.setEmail(scan.nextLine());
+			pInfo.setGuardianName(scan.nextLine());
+			pInfo.setGuardianEmail(scan.nextLine());
+			pInfo.setGuardianPhone(scan.nextLine());
+			pInfo.setEmergencyName(scan.nextLine());
+			pInfo.setEmergencyPhone(scan.nextLine());
+			pInfo.setInsuranceInfo(scan.nextLine());
+			pInfo.setPharmacyName(scan.nextLine());
+			pInfo.setPharmacyAddress(scan.nextLine());
+			scan.close();
+		} 
 		
+		MedHistory medHistory = new MedHistory();
 		fileName = "src/assets/medHistory/" + fullName + ".txt";
 		file = new File(fileName);
-		scan = new Scanner(file);
-		MedHistory medHistory = new MedHistory();
-		medHistory.setAllergies(scan.nextLine());
-		medHistory.setConcerns(scan.nextLine());
-		medHistory.setHealthIssues(scan.nextLine());
-		medHistory.setMedications(scan.nextLine());
-		medHistory.setImmunizations(scan.nextLine());
-		scan.close();
+		if (file.exists()) {
+			scan = new Scanner(file);
+			medHistory.setAllergies(scan.nextLine());
+			medHistory.setConcerns(scan.nextLine());
+			medHistory.setHealthIssues(scan.nextLine());
+			medHistory.setMedications(scan.nextLine());
+			medHistory.setImmunizations(scan.nextLine());
+			scan.close();
+		}
+		
 		
 		// ignore this huge block of text. made it by mistake :( maybe we will need it somewhere else
 		/*
