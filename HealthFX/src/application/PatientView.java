@@ -169,11 +169,7 @@ public class PatientView extends BorderPane {
 		@Override
 		public void handle(ActionEvent arg0) {
 			MedicalSystem medSys = MedicalSystem.getInstance();
-			try {
-				medSys.savePatientInfo(patient);
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			}
+			savePatient();
 			medSys.toHomePage();
 		} //End handle
 	} //End subclass

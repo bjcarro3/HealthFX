@@ -1,7 +1,7 @@
 04/08/2024
-72
-200
-97
+72.0
+200.0
+97.0
 120/80
 No Prescriptions
 No Results

@@ -136,6 +136,26 @@ public class MedicalSystem {
 		pw.close();
 	}
 	
+	//Save appointment to file system
+	public void saveAppointment(Patient patient, Appointment appt, int visitNum) throws FileNotFoundException {
+		String fileName;
+		if (visitNum == 0) {
+			fileName = "src/assets/appointments/" + patient.getFirstName() + patient.getLastName() + ".txt";
+		} else {
+			fileName = "src/assets/appointments/" + patient.getFirstName() + patient.getLastName() + visitNum + ".txt";
+		}
+		PrintWriter pw = new PrintWriter(fileName);
+		pw.println(appt.getDate());
+		pw.println(appt.getHeight());
+		pw.println(appt.getWeight());
+		pw.println(appt.getTemperature());
+		pw.println(appt.getBp());
+		pw.println(appt.getPrescriptions());
+		pw.println(appt.getExamResults());
+		pw.println(appt.getRecommendations());
+		pw.close();
+	}
+	
 	//Create a patient object based on information in the system and return it
 	public Patient getPatient(String fullName, String inputBirthday, String inputPass) throws FileNotFoundException {
 		String fileName = "src/assets/patients/" + fullName + ".txt";

@@ -18,6 +18,9 @@ import javafx.event.EventHandler;
 import java.io.FileNotFoundException;
 
 public class DoctorVisitScreen extends DoctorView {
+	private Appointment visit;
+	private int index;
+	
 	private HBox centerHolder;
 	private VBox leftHolder;
 	private VBox rightHolder;
@@ -50,7 +53,6 @@ public class DoctorVisitScreen extends DoctorView {
 	private Label recommendationsLabel;
 	private TextArea recommendationsArea;
 	
-
 	public DoctorVisitScreen(Doctor doctor, Patient patient, int index) {
 		super(doctor, patient);
 		
@@ -59,7 +61,8 @@ public class DoctorVisitScreen extends DoctorView {
 		Font textFont = Font.font("Verdana", 15);
 			
 		MedicalSystem medSys = null;
-		Appointment visit = null;
+		visit = null;
+		this.index = index;
 		try {
 			medSys = MedicalSystem.getInstance();
 			visit = medSys.getAppointment(patient.getFirstName() + patient.getLastName(), index);
@@ -185,6 +188,25 @@ public class DoctorVisitScreen extends DoctorView {
 		
 		this.setCenter(centerHolder);
 	}
+	
+	//Update patient object, then use medical system to save it to the file system
+	protected void savePatient() {
+		visit.setWeight(Float.parseFloat(weightField.getText()));
+		visit.setHeight(Float.parseFloat(heightField.getText()));
+		visit.setTemperature(Float.parseFloat(tempField.getText()));
+		visit.setBp(bpField.getText());
+		visit.setExamResults(examResultsArea.getText());
+		visit.setPrescriptions(prescriptionArea.getText());
+		visit.setRecommendations(recommendationsArea.getText());
+		
+		MedicalSystem medSys = MedicalSystem.getInstance();
+		try {
+			medSys.saveAppointment(patient, visit, index);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	
 	//To be implemented for pharmacy integration
 	private class SendToPharmacyHandler implements EventHandler<ActionEvent> {

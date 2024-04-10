@@ -58,7 +58,10 @@ public class DoctorConversationScreen extends BorderPane {
 	
 	
 	public DoctorConversationScreen(Doctor doctor, Patient patient) {
+		this.doctor = doctor;
 		this.patient = patient;
+		MedicalSystem medSys = MedicalSystem.getInstance();
+		patient.setConversation(medSys.getConversation((patient.getFirstName() + patient.getLastName())));
 		Font titleFont = Font.font("Verdana", 25);
 		Font textFont = Font.font("Verdana", 15);
 		Font buttonFont = Font.font("Verdana", 12);
@@ -96,10 +99,11 @@ public class DoctorConversationScreen extends BorderPane {
 		messageArea.setFont(textFont);
 		messageArea.setEditable(false);
 		messageArea.setPrefHeight(500);
+		displayMessages();
 		
 		//Send Area
 		//Sender Name
-		senderNameLabel = new Label("Dr. " + doctor.getName());
+		senderNameLabel = new Label("Dr. " + doctor.getName() + ":");
 		senderNameLabel.setFont(textFont);
 		
 		//Sender Text Field
@@ -179,9 +183,11 @@ public class DoctorConversationScreen extends BorderPane {
 		public void handle(ActionEvent arg0) {
 			if(!sendArea.getText().isBlank()) {
 				patient.getConversation().addMessage(
-						"Dr. " + doctor.getName() + ": ");
+						"Dr. " + doctor.getName() + ": " + sendArea.getText());
 				sendArea.setText(""); //Clear text field
 				displayMessages();
+				MedicalSystem medSys = MedicalSystem.getInstance();
+				medSys.saveConversation((patient.getFirstName() + patient.getLastName()), patient.getConversation());
 			}
 		} //End handle
 	} //End subclass

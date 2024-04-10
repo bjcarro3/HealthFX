@@ -53,7 +53,6 @@ public class PatientConversationScreen extends BorderPane {
 	public PatientConversationScreen(Patient patient) {
 		this.patient = patient;
 		MedicalSystem medSys = MedicalSystem.getInstance();
-		medSys.getConversation((patient.getFirstName() + patient.getLastName()));
 		patient.setConversation(medSys.getConversation((patient.getFirstName() + patient.getLastName())));
 		
 		
@@ -147,7 +146,6 @@ public class PatientConversationScreen extends BorderPane {
 	
 	private class SendHandler implements EventHandler<ActionEvent> {
 
-		@SuppressWarnings("null")
 		public void handle(ActionEvent arg0) {
 			if(!sendArea.getText().isBlank()) {
 				patient.getConversation().addMessage(
