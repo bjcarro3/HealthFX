@@ -10,10 +10,19 @@ public class Conversation {
 	public Conversation(String patient, String doctor, ArrayList<String> messages) {
 		this.patient = patient;
 		this.doctor = doctor;
-		this.messages = messages;
+		if(messages != null) {
+			this.messages = messages;
+		}
+		else {
+			this.messages = new ArrayList<>();
+		}
 	}
 	
 	public void addMessage(String message) {
 		messages.add(message);
+	}
+	
+	public ArrayList<String> getMessages() {
+		return messages;
 	}
 }
