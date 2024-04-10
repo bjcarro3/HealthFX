@@ -194,4 +194,32 @@ public class MedicalSystem {
 		Patient patient = new Patient(firstName, lastName, birthday, pInfo, medHistory);
 		return patient;
 	}
+	
+	public Appointment getAppointment(String fullName, int visitNum) throws FileNotFoundException {
+		String fileName;
+		if (visitNum == 0) {
+			fileName = "src/assets/appointments/" + fullName + ".txt";
+		} else {
+			fileName = "src/assets/appointments/" + fullName + visitNum + ".txt";
+		}
+		File file = new File(fileName);
+		if (!file.exists()) {
+			return null;
+		}
+		Scanner scan = new Scanner(file);
+		String date = scan.nextLine();
+		Appointment pApt = new Appointment(date);
+		if (scan.hasNext()) {	
+			pApt.setHeight(Float.parseFloat(scan.nextLine()));
+			pApt.setWeight(Float.parseFloat(scan.nextLine()));
+			pApt.setTemperature(Float.parseFloat(scan.nextLine()));
+			pApt.setBp(scan.nextLine());
+			pApt.setPrescriptions(scan.nextLine());
+			pApt.setExamResults(scan.nextLine());
+			pApt.setRecommendations(scan.nextLine());
+		}
+		scan.close();
+		
+		return pApt;
+	}
 }

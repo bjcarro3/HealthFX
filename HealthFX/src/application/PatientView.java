@@ -1,5 +1,6 @@
 package application;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
@@ -24,7 +25,7 @@ public class PatientView extends BorderPane {
 	protected Patient patient;
 	private Label patientName;
 	private Button contactButton;
-	//private ArrayList<Button> visitButtons;
+	private ArrayList<Button> visitButtons;
 	private Button[] visitButton;
 	private Button messagesButton;
 	private Button logoutButton;
@@ -63,13 +64,22 @@ public class PatientView extends BorderPane {
 		leftColumn.getChildren().add(contactHolder);
 		contactButton.setOnAction(new ContactHandler());
 		
-		//visitButton = new Button[numVisit];
-		visitButton = new Button[3];
+		// find # of visits
+		int numVisit = 0;
+		String fileName = "src/assets/appointments/" + patient.getFirstName() + patient.getLastName();
+		File file = new File(fileName + ".txt");
+		while (file.exists()) {
+			numVisit++;
+			file = new File(fileName + numVisit + ".txt");
+		}
+		
+		visitButton = new Button[numVisit];
 		
 		for (int i = 0; i < visitButton.length; i++) {
-			final int index = i + 1;
+			final int index = i;
 			
 			visitButton[i] = new Button("Visit " + (i + 1));
+			visitButton[i].setFont(buttonFont);
 			
 			visitButton[i].setOnAction(event -> {
 				MedicalSystem medSys = null;
@@ -87,15 +97,6 @@ public class PatientView extends BorderPane {
 		buttonHolder.setAlignment(Pos.CENTER);
 		leftColumn.getChildren().add(buttonHolder);
 		
-		/*
-		for (int i=0; i<3; i++) {
-			Button visitButton = new Button("Visit " + i);
-			visitButton.setFont(buttonFont);
-			VBox buttonHolder = new VBox(visitButton);
-			buttonHolder.setAlignment(Pos.CENTER);
-			leftColumn.getChildren().add(buttonHolder);
-		}
-		*/
 		
 		//Right Column
 		rightColumn = new BorderPane();
