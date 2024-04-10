@@ -2,8 +2,13 @@ package application;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+<<<<<<< HEAD
 import java.io.FilenameFilter;
+=======
+import java.io.File;
+>>>>>>> branch 'master' of https://github.com/bjcarro3/HealthFX.git
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -28,8 +33,8 @@ public class DoctorInboxScreen extends BorderPane {
 	//Main Body
 	private VBox bodyHolder;
 	private Label titleLabel;
-	//private ArrayList<Button> messageList;
-	private Button[] messageList;
+	private ArrayList<Button> messageList;
+	private int numPatient;
 	
 	
 	//Right side
@@ -58,9 +63,47 @@ public class DoctorInboxScreen extends BorderPane {
 		titleLabel = new Label("Inbox");
 		titleLabel.setFont(titleFont);
 		bodyHolder.getChildren().add(titleLabel);
-		
+
+
+		// Calculate number of patients
+		File dir = new File("src/assets/patients");
+		File[] directoryListing = dir.listFiles();
+		numPatient = directoryListing.length;
+		messageList = new ArrayList<Button>();
+		for (File child : directoryListing) {
+			
+		    try {
+		    	if ((child.getName().substring(child.getName().length() - 3)).equals("txt")) {
+		    		Scanner scan = new Scanner(child);
+					String firstName = scan.nextLine();
+					String lastName = scan.nextLine();
+					String birthday = scan.nextLine();
+					scan.close();
+					
+					Button btnToAdd = new Button(firstName + " " + lastName);
+					messageList.add(btnToAdd);
+					btnToAdd.setOnAction(event -> {
+					MedicalSystem medSys = null;
+					Patient patient = null;
+					try {
+						medSys = MedicalSystem.getInstance();
+						patient  = medSys.getPatient(firstName+lastName, birthday);
+					} catch (FileNotFoundException e) {
+						e.printStackTrace();
+					}
+					medSys.toDoctorConversationScreen(doctor, patient);
+					});
+		    	}
+				
+				
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+		      
+		}
 		
 		//messageList = new Button[numPatient];
+		/*
 		messageList = new Button[3];
 		
 		for (int i = 0; i < messageList.length; i++) {
@@ -76,12 +119,12 @@ public class DoctorInboxScreen extends BorderPane {
 				try {
 					medSys = MedicalSystem.getInstance();
 				} catch (FileNotFoundException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				medSys.toDoctorConversationScreen(doctor, patient, index);
 			});
 		}
+		*/
 		bodyHolder.getChildren().addAll(messageList);
 		/*
 		for (int i=0; i<3; i++) {
