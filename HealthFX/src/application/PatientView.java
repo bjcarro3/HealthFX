@@ -50,7 +50,7 @@ public class PatientView extends BorderPane {
 		leftColumn.setPadding(new Insets(10, 10, 10 ,10));
 		
 		//patientName = new Label(patient.getFirstName() + " " + patient.getLastName());
-		patientName = new Label("John Smith");
+		patientName = new Label(patient.getFirstName() + " " + patient.getLastName());
 		patientName.setFont(nameFont);
 		nameHolder = new HBox(patientName);
 		nameHolder.setAlignment(Pos.CENTER);

@@ -164,6 +164,25 @@ public class PatientLoginScreen extends BorderPane {
 				statusLabel.setText("Could Not Log In: Empty Fields");
 				statusLabel.setTextFill(Color.RED);
 			} else {
+				String fullName = firstNameField.getText() + lastNameField.getText();
+				MedicalSystem medSys;
+				Patient loginPatient;
+				try {
+					medSys = MedicalSystem.getInstance();
+					loginPatient = medSys.getPatient(fullName, birthdayField.getText(), passwordField.getText());
+					if (loginPatient == null) {
+						statusLabel.setText("Incorrect Login Information.");
+						statusLabel.setTextFill(Color.RED);
+					} else {
+						medSys.toPatientView(loginPatient);
+					}
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				
+				/*
 				loginCheckFile = new File("src/assets/patients/" + firstNameField.getText() + lastNameField.getText() + ".txt");
 				//Checks if user exists
 				if(loginCheckFile.exists()){
@@ -177,7 +196,7 @@ public class PatientLoginScreen extends BorderPane {
 					birthday = patientScanner.nextLine();
 					if(firstName.equals(firstNameField.getText()) && lastName.equals(lastNameField.getText()) && birthday.equals(birthdayField.getText()) && patientScanner.nextLine().equals(passwordField.getText())){
 						
-						loginInfo = new File("src/assets/Patients/" + firstNameField.getText() + lastNameField.getText() + ".txt");
+						loginInfo = new File("src/assets/patients/" + firstNameField.getText() + lastNameField.getText() + ".txt");
 						
 						patientInfo = new PatientInfo();
 						medHist = new MedHistory();
@@ -203,6 +222,7 @@ public class PatientLoginScreen extends BorderPane {
 					statusLabel.setTextFill(Color.RED);
 
 				}
+				*/
 				
 			}
 			

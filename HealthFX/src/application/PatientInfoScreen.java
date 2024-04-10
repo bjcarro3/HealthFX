@@ -60,7 +60,7 @@ public class PatientInfoScreen extends PatientView {
 		firstNameLabel = new Label("First Name:");
 		firstNameLabel.setFont(textFont);
 		
-		firstNameField = new TextField();
+		firstNameField = new TextField(patient.getFirstName());
 		firstNameField.setFont(textFont);
 		firstNameField.setEditable(false);
 		firstNameField.setBackground(new Background(new BackgroundFill(Color.GRAY, CornerRadii.EMPTY, Insets.EMPTY)));
@@ -70,7 +70,7 @@ public class PatientInfoScreen extends PatientView {
 		lastNameLabel = new Label("Last Name:");
 		lastNameLabel.setFont(textFont);
 		
-		lastNameField = new TextField();
+		lastNameField = new TextField(patient.getLastName());
 		lastNameField.setFont(textFont);
 		lastNameField.setEditable(false);
 		lastNameField.setBackground(new Background(new BackgroundFill(Color.GRAY, CornerRadii.EMPTY, Insets.EMPTY)));
@@ -79,7 +79,7 @@ public class PatientInfoScreen extends PatientView {
 		dobLabel = new Label("D.O.B:");
 		dobLabel.setFont(textFont);
 		
-		dobField = new TextField();
+		dobField = new TextField(patient.getBirthday());
 		dobField.setFont(textFont);
 		dobField.setEditable(false);
 		dobField.setBackground(new Background(new BackgroundFill(Color.GRAY, CornerRadii.EMPTY, Insets.EMPTY)));
@@ -88,42 +88,42 @@ public class PatientInfoScreen extends PatientView {
 		addressLabel = new Label("Address:");
 		addressLabel.setFont(textFont);
 		
-		addressField = new TextField();
+		addressField = new TextField(patient.getPatientInfo().getAddress());
 		addressField.setFont(textFont);
 	
 		//Phone
 		phoneLabel = new Label("Phone:");
 		phoneLabel.setFont(textFont);
 		
-		phoneField = new TextField();
+		phoneField = new TextField(patient.getPatientInfo().getPhoneNumber());
 		phoneField.setFont(textFont);
 		
 		//Email
 		emailLabel = new Label("Email:");
 		emailLabel.setFont(textFont);
 		
-		emailField = new TextField();
+		emailField = new TextField(patient.getPatientInfo().getEmail());
 		emailField.setFont(textFont);
 		
 		//Guardian Name
 		guardianNameLabel = new Label("Guardian Name:");
 		guardianNameLabel.setFont(textFont);
 		
-		guardianNameField = new TextField();
+		guardianNameField = new TextField(patient.getPatientInfo().getGuardianName());
 		guardianNameField.setFont(textFont);
 		
 		//Guardian Email
 		guardianEmailLabel = new Label("Guardian Email:");
 		guardianEmailLabel.setFont(textFont);
 		
-		guardianEmailField = new TextField();
+		guardianEmailField = new TextField(patient.getPatientInfo().getGuardianEmail());
 		guardianEmailField.setFont(textFont);
 		
 		//Guardian Phone
 		guardianPhoneLabel = new Label("Guardian Phone:");
 		guardianPhoneLabel.setFont(textFont);
 		
-		guardianPhoneField = new TextField();
+		guardianPhoneField = new TextField(patient.getPatientInfo().getGuardianPhone());
 		guardianPhoneField.setFont(textFont);
 		
 		//Set Up GridPane
@@ -160,7 +160,7 @@ public class PatientInfoScreen extends PatientView {
 		emergencyNameLabel = new Label("Contact's Name:");
 		emergencyNameLabel.setFont(textFont);
 		
-		emergencyNameField = new TextField();
+		emergencyNameField = new TextField(patient.getPatientInfo().getEmergencyName());
 		emergencyNameField.setFont(textFont);
 		emergencyNameField.setPrefWidth(400);
 		
@@ -168,7 +168,7 @@ public class PatientInfoScreen extends PatientView {
 		emergencyPhoneLabel = new Label("Contact's Phone:");
 		emergencyPhoneLabel.setFont(textFont);
 		
-		emergencyPhoneField = new TextField();
+		emergencyPhoneField = new TextField(patient.getPatientInfo().getEmergencyPhone());
 		emergencyPhoneField.setFont(textFont);
 		
 		//Set up GridPane

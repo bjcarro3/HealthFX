@@ -1,4 +1,4 @@
 Sample
 Patient
 01/01/2001
-pAs$word
+pass

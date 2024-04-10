@@ -109,9 +109,12 @@ public class MedicalSystem {
 		setScreen(new PatientView(patient));
 	}
 	
-	public Patient getPatient(String fullName, String inputPass) throws FileNotFoundException {
+	public Patient getPatient(String fullName, String inputBirthday, String inputPass) throws FileNotFoundException {
 		String fileName = "src/assets/patients/" + fullName + ".txt";
 		File file = new File(fileName);
+		if (!file.exists()) {
+			return null;
+		}
 		Scanner scan = new Scanner(file);
         
 		String firstName = scan.nextLine();
@@ -119,7 +122,7 @@ public class MedicalSystem {
 		String birthday = scan.nextLine();
 		String password = scan.nextLine();
 		scan.close();
-		if (inputPass != password) {
+		if (!inputPass.equals(password) || !inputBirthday.equals(birthday)) {
 			return null;
 		}
 		
