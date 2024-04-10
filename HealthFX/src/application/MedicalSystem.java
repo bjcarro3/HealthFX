@@ -109,6 +109,37 @@ public class MedicalSystem {
 		setScreen(new PatientView(patient));
 	}
 	
+	public void savePatientInfo(Patient patient) throws FileNotFoundException {
+		PatientInfo pInfo = patient.getPatientInfo();
+		String fileName = "src/assets/patientinformation/" + patient.getFirstName() + patient.getLastName() + ".txt";
+		PrintWriter pw = new PrintWriter(fileName);
+		pw.println(pInfo.getSex());
+		pw.println(pInfo.getAddress());
+		pw.println(pInfo.getPhoneNumber());
+		pw.println(pInfo.getEmail());
+		pw.println(pInfo.getGuardianName());
+		pw.println(pInfo.getGuardianEmail());
+		pw.println(pInfo.getGuardianPhone());
+		pw.println(pInfo.getEmergencyName());
+		pw.println(pInfo.getEmergencyPhone());
+		pw.println(pInfo.getInsuranceInfo());
+		pw.println(pInfo.getPharmacyName());
+		pw.println(pInfo.getPharmacyAddress());
+		pw.close();
+	}
+	
+	public void saveMedicalHistory(Patient patient) throws FileNotFoundException {
+		MedHistory medHistory = patient.getMedHistory();
+		String fileName = "src/assets/medHistory/" + patient.getFirstName() + patient.getLastName() + ".txt";
+		PrintWriter pw = new PrintWriter(fileName);
+		pw.println(medHistory.getAllergies());
+		pw.println(medHistory.getConcerns());
+		pw.println(medHistory.getHealthIssues());
+		pw.println(medHistory.getMedications());
+		pw.println(medHistory.getImmunizations());
+		pw.close();
+	}
+	
 	public Patient getPatient(String fullName, String inputBirthday, String inputPass) throws FileNotFoundException {
 		String fileName = "src/assets/patients/" + fullName + ".txt";
 		File file = new File(fileName);

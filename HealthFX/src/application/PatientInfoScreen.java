@@ -1,5 +1,7 @@
 package application;
 
+import java.io.FileNotFoundException;
+
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -192,6 +194,31 @@ public class PatientInfoScreen extends PatientView {
 		
 		
 	
+	}
+	
+	
+	protected void savePatient() {
+		PatientInfo pInfo = patient.getPatientInfo();
+		pInfo.setAddress(addressField.getText());
+		pInfo.setEmail(emailField.getText());
+		pInfo.setPhoneNumber(phoneField.getText());
+		pInfo.setGuardianName(guardianNameField.getText());
+		pInfo.setGuardianEmail(guardianEmailField.getText());
+		pInfo.setGuardianPhone(guardianPhoneField.getText());
+		pInfo.setEmergencyName(emergencyNameField.getText());
+		pInfo.setEmergencyPhone(emergencyPhoneField.getText());
+		MedicalSystem medSys = null;
+		try {
+			medSys = MedicalSystem.getInstance();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			medSys.savePatientInfo(patient);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 	
 }

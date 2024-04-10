@@ -1,5 +1,7 @@
 package application;
 
+import java.io.FileNotFoundException;
+
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -120,6 +122,27 @@ public class MedHistoryScreen extends DoctorView {
 		centerHolder.setPadding(new Insets(10, 10, 10, 10));
 		
 		this.setCenter(centerHolder);
+	}
+	
+	protected void savePatient() {
+		MedHistory medHistory = patient.getMedHistory();
+		medHistory.setAllergies(allergiesArea.getText());
+		medHistory.setConcerns(concernsArea.getText());
+		medHistory.setHealthIssues(healthIssuesArea.getText());
+		medHistory.setMedications(medicationsArea.getText());
+		medHistory.setImmunizations(immunizationsArea.getText());
+		MedicalSystem medSys = null;
+		try {
+			medSys = MedicalSystem.getInstance();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			medSys.saveMedicalHistory(patient);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

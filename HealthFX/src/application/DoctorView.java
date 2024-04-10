@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.text.SimpleDateFormat; 
 import java.util.Date; 
 
@@ -112,6 +111,7 @@ public class DoctorView extends BorderPane {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				savePatient();
 				medSys.toDoctorVisitScreen(doctor, patient, index);
 			});
         }
@@ -158,6 +158,22 @@ public class DoctorView extends BorderPane {
 		
 	}
 	
+	protected void savePatient() {
+		MedicalSystem medSys = null;
+		try {
+			medSys = MedicalSystem.getInstance();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			medSys.savePatientInfo(patient);
+			medSys.saveMedicalHistory(patient);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	private class PatientInfosHandler implements EventHandler<ActionEvent> {
 
 		@Override
@@ -169,6 +185,7 @@ public class DoctorView extends BorderPane {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			savePatient();
 			medSys.toDoctorPatientInfoScreen(doctor, patient);
 		} //End handle
 	} //End subclass
@@ -184,6 +201,7 @@ public class DoctorView extends BorderPane {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			savePatient();
 			medSys.toMedHistoryScreen(doctor, patient);
 		} //End handle
 	} //End subclass
@@ -199,6 +217,7 @@ public class DoctorView extends BorderPane {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			savePatient();
 			medSys.toDoctorInboxScreen(doctor);
 		} //End handle
 	} //End subclass
@@ -214,6 +233,7 @@ public class DoctorView extends BorderPane {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			savePatient();
 			medSys.toHomePage();
 		} //End handle
 	} //End subclass

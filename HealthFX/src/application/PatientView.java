@@ -89,6 +89,7 @@ public class PatientView extends BorderPane {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				savePatient();
 				medSys.toPatientVisitScreen(patient, index);
 			});
         }
@@ -147,6 +148,7 @@ public class PatientView extends BorderPane {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			savePatient();
 			medSys.toPatientInfoScreen(patient);
 		} //End handle
 	} //End subclass
@@ -162,10 +164,25 @@ public class PatientView extends BorderPane {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			savePatient();
 			medSys.toPatientMessageScreen(patient);
 		} //End handle
 	} //End subclass
 	
+	protected void savePatient() {
+		MedicalSystem medSys = null;
+		try {
+			medSys = MedicalSystem.getInstance();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			medSys.savePatientInfo(patient);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	private class LogOutHandler implements EventHandler<ActionEvent> {
 
@@ -175,7 +192,11 @@ public class PatientView extends BorderPane {
 			try {
 				medSys = MedicalSystem.getInstance();
 			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				medSys.savePatientInfo(patient);
+			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
 			medSys.toHomePage();
