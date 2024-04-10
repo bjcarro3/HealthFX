@@ -83,8 +83,8 @@ public class MedicalSystem {
 		setScreen(new DoctorInboxScreen(doctor));
 	}
 	
-	public void toDoctorConversationScreen(Doctor doctor, Patient patient, int index) {
-		setScreen(new DoctorConversationScreen(doctor, patient, index));
+	public void toDoctorConversationScreen(Doctor doctor, Patient patient) {
+		setScreen(new DoctorConversationScreen(doctor, patient));
 	}
 	
 	public void toDoctorVisitScreen(Doctor doctor, Patient patient, int index) {

@@ -53,7 +53,7 @@ public class DoctorConversationScreen extends BorderPane {
 	
 	
 	
-	public DoctorConversationScreen(Doctor doctor, Patient patient, int index) {
+	public DoctorConversationScreen(Doctor doctor, Patient patient) {
 		this.patient = patient;
 		Font titleFont = Font.font("Verdana", 25);
 		Font textFont = Font.font("Verdana", 15);
