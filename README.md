@@ -17,7 +17,6 @@ This is Matthew. I am going to put a little note here that demonstrates how each
 - File Name: FirstLastname.txt
 - Contents of each by line:
     - Patient Name
-    - Doctor Name
     - [name of sender]: [message] \n
 
 **patientinfo**

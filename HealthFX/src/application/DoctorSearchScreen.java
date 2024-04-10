@@ -40,16 +40,7 @@ public class DoctorSearchScreen extends BorderPane {
 	private Button getRecordsButton;
 	private Button logoutButton;
 	
-	private MedHistory patientHist;
-	private PatientInfo patientInfo;
-	private String firstName;
-	private String lastName;
-	private String birthday;
-	
-	private Patient patient;
 	private Doctor doctor;
-	
-	private Scanner patientScanner;
 	private File patientFile;
 	
 	public DoctorSearchScreen(Doctor doctor) {
