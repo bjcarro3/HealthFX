@@ -47,3 +47,4 @@ This is Matthew. I am going to put a little note here that demonstrates how each
     - new prescriptions
     - exam results
     - recommendations
+    - Every line afterwards until an empty line/EOF will be visit summary.
