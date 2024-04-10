@@ -1,3 +1,6 @@
+//Group: Tu37
+//Description: Starting UI that allows the user to navigate to the Patient or Doctor side of the program
+
 package application;
 
 import java.io.FileNotFoundException;

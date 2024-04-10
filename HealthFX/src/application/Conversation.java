@@ -1,3 +1,6 @@
+//Group: Tu37
+//Description: Stores an ArrayList of Strings representing a conversation log, used for messaging
+
 package application;
 
 import java.util.ArrayList;

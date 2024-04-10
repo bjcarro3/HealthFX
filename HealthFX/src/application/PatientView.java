@@ -1,3 +1,7 @@
+//Group: Tu37
+//Description: Parent UI containing sidebars when a Patient logs in. Is also the default
+//			   UI when a patient logs in before the specific UI is chosen.
+
 package application;
 
 import java.io.File;

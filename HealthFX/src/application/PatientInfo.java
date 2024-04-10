@@ -1,3 +1,7 @@
+//Group: Tu37
+//Description: Part of a Patient object. Store information related to a Patient's contact information,
+//			   insurance, and pharmacy
+
 package application;
 
 public class PatientInfo {

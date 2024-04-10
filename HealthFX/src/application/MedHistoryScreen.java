@@ -1,3 +1,7 @@
+//Group: Tu37
+//Description: UI used by Doctors to view and edit a patient's medical history. Saves to the system when
+//			   the screen is changed.
+
 package application;
 
 import java.io.FileNotFoundException;
@@ -124,6 +128,8 @@ public class MedHistoryScreen extends DoctorView {
 		this.setCenter(centerHolder);
 	}
 	
+	
+	//Update patient object, then use Medical System to save to file system
 	protected void savePatient() {
 		MedHistory medHistory = patient.getMedHistory();
 		medHistory.setAllergies(allergiesArea.getText());

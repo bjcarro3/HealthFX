@@ -1,3 +1,6 @@
+//Group: Tu37
+//Description: Part of a Patient object. Store information related to a Patient's previous medical history
+
 package application;
 
 public class MedHistory {

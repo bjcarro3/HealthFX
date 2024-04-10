@@ -1,3 +1,6 @@
+//Group: Tu37
+//Description: Driver program that starts the UI. Defines the window and starts the UI at the Home Page UI
+
 package application;
 
 import javafx.application.Application;

@@ -1,3 +1,6 @@
+//Group: Tu37
+//Description: UI used by Patients to view the results for each visit recorded by the doctor
+
 package application;
 
 import java.io.FileNotFoundException;

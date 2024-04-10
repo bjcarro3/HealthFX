@@ -1,3 +1,7 @@
+//Group: Tu37
+//Description: Stores data related to a patient's visit, used for Visit screens
+
+
 package application;
 
 public class Appointment {

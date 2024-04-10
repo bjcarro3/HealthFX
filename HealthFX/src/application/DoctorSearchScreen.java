@@ -1,3 +1,7 @@
+//Group: Tu37
+//Description: UI used by doctors to pull up a Patient's records by their name and birthday. Creates a
+//			   Patient object to keep track of this patient used in next UIs
+
 package application;
 
 import java.io.File;
@@ -34,6 +38,7 @@ public class DoctorSearchScreen extends BorderPane {
 	private ImageView logoImageView;
 	private Label titleLabel;
 	private Label promptLabel;
+	private Label statusLabel;
 	private TextField firstNameField;
 	private TextField lastNameField;
 	private TextField birthdayField;
@@ -70,10 +75,14 @@ public class DoctorSearchScreen extends BorderPane {
 		promptLabel = new Label("Patient Records");
 		promptLabel.setFont(Font.font("Verdana", FontWeight.BOLD, FontPosture.REGULAR, 28));
 		
+		//Status Text
+		statusLabel = new Label();
+		statusLabel.setFont(Font.font("Verdana", 20));
+		
 		//Place title and prompt into titleHolder and align
 		titleHolder = new VBox();
 		titleHolder.setAlignment(Pos.CENTER);
-		titleHolder.getChildren().addAll(logoImageView, titleLabel, promptLabel);
+		titleHolder.getChildren().addAll(logoImageView, titleLabel, promptLabel, statusLabel);
 				
 		//Create Text Fields
 		Font fieldFont = Font.font("Verdana", 20);
@@ -133,12 +142,15 @@ public class DoctorSearchScreen extends BorderPane {
 		} //End handle
 	} //End subclass
 	
+	
+	//Gets the records of patient when button is clicked an bring up UI for that patient
 	private class GetRecordsHandler implements EventHandler<ActionEvent> {
 
 		@Override
 		public void handle(ActionEvent arg0) {
 			if (firstNameField.getText().isBlank() || lastNameField.getText().isBlank() || birthdayField.getText().isBlank()) {
-				System.out.println("Empty field(s)");
+				statusLabel.setText("Empty Fields");
+				statusLabel.setTextFill(Color.RED);
 			} else {
 				String fullName = firstNameField.getText() + lastNameField.getText();
 				MedicalSystem medSys;
@@ -147,13 +159,14 @@ public class DoctorSearchScreen extends BorderPane {
 					medSys = MedicalSystem.getInstance();
 					patient = medSys.getPatient(fullName, birthdayField.getText());
 					if (patient == null) {
-						System.out.println("Patient not found.");
+						statusLabel.setText("Patient Not Fount");
+						statusLabel.setTextFill(Color.RED);
 					} else {
 						medSys.toDoctorView(doctor, patient);
 					}
 				} catch (FileNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					statusLabel.setText("Patient Not Found");
+					statusLabel.setTextFill(Color.RED);
 				}
 			}
 			//Checks first and last name via file location

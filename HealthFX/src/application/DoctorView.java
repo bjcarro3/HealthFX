@@ -1,3 +1,7 @@
+//Group: Tu37
+//Description: Parent UI containing sidebars when a Patient is pulled up by a doctor. Is also the default
+//			   UI when a patient's records are pulled up before the specific UI is chosen.
+
 package application;
 
 import java.io.File;
@@ -96,7 +100,7 @@ public class DoctorView extends BorderPane {
 		}
 		
 		visitButton = new Button[numVisit];
-		
+		//For each visit for the patient create a button to view that visit
 		for (int i = 0; i < visitButton.length; i++) {
 			final int index = i;
 			
@@ -152,6 +156,7 @@ public class DoctorView extends BorderPane {
 		
 	}
 	
+	//Save the patient (called when screen exited), different for each child UI
 	protected void savePatient() {
 		MedicalSystem medSys = MedicalSystem.getInstance();
 		try {
@@ -202,6 +207,7 @@ public class DoctorView extends BorderPane {
 		} //End handle
 	} //End subclass
 	
+	//Create a new visit for today's date for the patient and add it to the system
 	private class AddVisitHandler implements EventHandler<ActionEvent> {
 		public void handle(ActionEvent arg0) {
 			MedicalSystem medSys = null;

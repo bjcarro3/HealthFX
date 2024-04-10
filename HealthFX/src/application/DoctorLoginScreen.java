@@ -1,3 +1,6 @@
+//Group: Tu37
+//Description: Login UI for doctors. Doctors log in based on a username and password stored in the system
+
 package application;
 
 import java.io.File;

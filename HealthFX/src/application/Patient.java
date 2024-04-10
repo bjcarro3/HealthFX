@@ -1,3 +1,6 @@
+//Group: Tu37
+//Description: Represents a Patient in the system. Stores currently viewed Patient's information for UIs
+
 package application;
 
 import java.util.ArrayList;

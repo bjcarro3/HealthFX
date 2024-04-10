@@ -1,3 +1,6 @@
+//Group: Tu37
+//Description: UI allowing doctor to open the messaging UI for every patient in the system
+
 package application;
 
 
@@ -66,7 +69,7 @@ public class DoctorInboxScreen extends BorderPane {
 		File[] directoryListing = dir.listFiles();
 		numPatient = directoryListing.length;
 		messageList = new ArrayList<Button>();
-		for (File child : directoryListing) {
+		for (File child : directoryListing) { //For each patient, create a button in the inbox
 			
 		    try {
 		    	if ((child.getName().substring(child.getName().length() - 3)).equals("txt")) {
@@ -98,42 +101,8 @@ public class DoctorInboxScreen extends BorderPane {
 		      
 		}
 		
-		//messageList = new Button[numPatient];
-		/*
-		messageList = new Button[3];
-		
-		for (int i = 0; i < messageList.length; i++) {
-			final int index = i;
-			File[] files = new File("src/assets/conversations").listFiles();
-			
-			messageList[i] = new Button("Patient" + (i+1)); //"Patient " + (i+1) + ": " + Patient.name
-			
-			Patient patient = null; //patient = patientID or like patient[i]
-			
-			messageList[i].setOnAction(event -> {
-				MedicalSystem medSys = null;
-				try {
-					medSys = MedicalSystem.getInstance();
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
-				}
-				medSys.toDoctorConversationScreen(doctor, patient, index);
-			});
-		}
-		*/
 		bodyHolder.getChildren().addAll(messageList);
-		/*
-		for (int i=0; i<3; i++) {
-			Button patientButton = new Button("Patient " + i);
-			patientButton.setFont(textFont);
-			patientButton.setPrefSize(1920, 40);
-			patientButton.setAlignment(Pos.CENTER_LEFT);
-			bodyHolder.getChildren().add(patientButton);
-		}
-		*/
-		
-		
-		
+
 		//Right Column
 		rightColumn = new BorderPane();
 		rightColumn.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
@@ -170,32 +139,6 @@ public class DoctorInboxScreen extends BorderPane {
 		this.setCenter(bodyHolder);
 		this.setRight(rightColumn);
 	}
-	/* added lines 101 - 140... debugging necessary*/ 
-	/*
-	 private void setupEventHandlers() {
-	        closeButton.setOnAction(new BackHandler());
-	        exitButton.setOnAction(new ExitHandler());
-	        // Add event handlers for patient buttons
-	        for (Button patientButton : messageList) {
-	            patientButton.setOnAction(new PatientButton());
-	        }
-	    }
-	 
-	 //Calls MedicalSystem to change the screen to PatientInfoScreen after clicking button.
-	 private class PatientButton implements EventHandler<ActionEvent> {
-
-	        @Override
-	        public void handle(ActionEvent event) {
-	            try {
-					MedicalSystem medSys = MedicalSystem.getInstance();
-				} catch (FileNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-	       //     medSys.toPatientInfo(); //INCORRECT IMPLEMENTATION; NEEDS TO BE FIXED
-	        }
-	    }
-	    */
 
 	    // Calls the MedicalSystem to change the screen to the home page
 	    private class BackHandler implements EventHandler<ActionEvent> {
@@ -203,7 +146,7 @@ public class DoctorInboxScreen extends BorderPane {
 	        @Override
 	        public void handle(ActionEvent event) {
 	            MedicalSystem medSys = MedicalSystem.getInstance();
-	            medSys.toDoctorSearch(doctor);	//Currently, clicking closeButton redirects to HomePage... FIX
+	            medSys.toDoctorSearch(doctor);	//clicking closeButton redirects to Search
 	        }
 	    }
 

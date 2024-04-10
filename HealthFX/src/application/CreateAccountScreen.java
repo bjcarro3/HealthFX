@@ -1,3 +1,7 @@
+//Group: Tu37
+//Description: UI for creating a Patient account in the System. Creates a new .txt file in the system
+//			   representing a patient given a first and last name, birthday, and password
+
 package application;
 
 
@@ -133,7 +137,7 @@ public class CreateAccountScreen extends BorderPane {
 		this.setBackground(new Background(new BackgroundFill(Color.rgb(100, 187, 248), CornerRadii.EMPTY, Insets.EMPTY)));
 	} //End Constructor
 	
-	
+	//When create account button is clicked
 	private class CreateAccountHandler implements EventHandler<ActionEvent> {
 
 		@Override

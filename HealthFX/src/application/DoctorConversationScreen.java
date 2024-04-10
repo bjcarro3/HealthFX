@@ -1,3 +1,7 @@
+//Group: Tu37
+//Description: UI used when a Doctor is messaging a specific patient. Allows the doctor to view messages,
+//			   send new messages, and view a patient's contact information if contacting is necessary
+
 package application;
 
 import java.io.FileNotFoundException;
@@ -160,6 +164,7 @@ public class DoctorConversationScreen extends BorderPane {
 		this.setRight(rightColumn);
 	}
 	
+	//Prints the conversation object to the screen
 	private void displayMessages() {
 		messageArea.clear();
 		for (String message : patient.getConversation().getMessages()) {
@@ -167,6 +172,7 @@ public class DoctorConversationScreen extends BorderPane {
 		}
 	}
 	
+	//Appends message from the SendArea to the conversation
 	private class SendHandler implements EventHandler<ActionEvent> {
 
 		@Override
@@ -180,6 +186,7 @@ public class DoctorConversationScreen extends BorderPane {
 		} //End handle
 	} //End subclass
 	
+	//Goes to inbox when inbox button is clicked
 	private class InboxHandler implements EventHandler<ActionEvent> {
 
 		@Override

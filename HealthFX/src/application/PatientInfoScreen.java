@@ -1,3 +1,7 @@
+//Group: Tu37
+//Description: UI used by patients to view and edit their contact information. Saves information on screen
+//			   change
+
 package application;
 
 import java.io.FileNotFoundException;

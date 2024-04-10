@@ -1,3 +1,7 @@
+//Group: Tu37
+//Description: UI for Patients to view and send messages to Doctors. Each Patient has one conversation log
+//			   as all medical staff share this conversation
+
 package application;
 
 import java.io.FileNotFoundException;

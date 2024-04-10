@@ -1,3 +1,7 @@
+//Group: Tu37
+//Description: UI used when a doctor is view a patient's information. Allows the doctor to update a patient's
+//			   information and saves it to the system when the screen changes
+
 package application;
 
 import java.io.FileNotFoundException;
@@ -269,6 +273,7 @@ public class DoctorPatientInfoScreen extends DoctorView {
 		
 	}
 	
+	//Update patient object, then use medical system to save it to the file system
 	protected void savePatient() {
 		PatientInfo pInfo = patient.getPatientInfo();
 		pInfo.setSex(sexField.getText());

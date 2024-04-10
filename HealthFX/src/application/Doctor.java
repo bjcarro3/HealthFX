@@ -1,3 +1,6 @@
+//Group: Tu37
+//Description: Represents a Doctor. Used to store information about currently signed in Doctor
+
 package application;
 
 import java.io.File;

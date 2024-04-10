@@ -1,3 +1,7 @@
+//Group: Tu37
+//Description: UI used by Patients to log in and view their information. Patients are identified in the
+//			   system by name, birthday, and a password to log in.
+
 package application;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -175,48 +179,6 @@ public class PatientLoginScreen extends BorderPane {
 					e.printStackTrace();
 				}
 				
-				
-				/*
-				loginCheckFile = new File("src/assets/patients/" + firstNameField.getText() + lastNameField.getText() + ".txt");
-				//Checks if user exists
-				if(loginCheckFile.exists()){
-					try {
-						patientScanner = new Scanner(loginCheckFile);
-					} catch (FileNotFoundException e) {
-						e.printStackTrace(); //This should never be hit
-					}
-					firstName = patientScanner.nextLine();
-					lastName = patientScanner.nextLine();
-					birthday = patientScanner.nextLine();
-					if(firstName.equals(firstNameField.getText()) && lastName.equals(lastNameField.getText()) && birthday.equals(birthdayField.getText()) && patientScanner.nextLine().equals(passwordField.getText())){
-						
-						loginInfo = new File("src/assets/patients/" + firstNameField.getText() + lastNameField.getText() + ".txt");
-						
-						patientInfo = new PatientInfo();
-						medHist = new MedHistory();
-						
-						loginPatient = new Patient(firstName, lastName, birthday, patientInfo, medHist);
-						MedicalSystem medSys;
-						try {
-							medSys = MedicalSystem.getInstance();
-							medSys.toPatientView(loginPatient);
-						} catch (FileNotFoundException e) {
-							statusLabel.setText("Could Not Log In: System Error");
-							statusLabel.setTextFill(Color.RED);
-						}
-						
-					}
-					else {
-						statusLabel.setText("Incorrect Login Information");
-						statusLabel.setTextFill(Color.RED);
-					}
-				}
-				else {
-					statusLabel.setText("Incorrect Login Information");
-					statusLabel.setTextFill(Color.RED);
-
-				}
-				*/
 				
 			}
 			

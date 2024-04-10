@@ -1,3 +1,6 @@
+//Group: Tu37
+//Description: UI used by Doctor to enter information about a visit. Multiple visits can be created per Patient
+
 package application;
 
 import javafx.geometry.Insets;
@@ -183,6 +186,7 @@ public class DoctorVisitScreen extends DoctorView {
 		this.setCenter(centerHolder);
 	}
 	
+	//To be implemented for pharmacy integration
 	private class SendToPharmacyHandler implements EventHandler<ActionEvent> {
 
 		@Override

@@ -1,3 +1,7 @@
+//Group: Tu37
+//Description: Singleton system object used to create and navigate to new UIs and to handle saving and loading
+//			   Patients and their information from the file system
+
 package application;
 import java.io.*;
 import java.util.Random;
@@ -99,6 +103,7 @@ public class MedicalSystem {
 		setScreen(new PatientView(patient));
 	}
 	
+	//Write patient info to file
 	public void savePatientInfo(Patient patient) throws FileNotFoundException {
 		PatientInfo pInfo = patient.getPatientInfo();
 		String fileName = "src/assets/patientinformation/" + patient.getFirstName() + patient.getLastName() + ".txt";
@@ -118,6 +123,7 @@ public class MedicalSystem {
 		pw.close();
 	}
 	
+	//Write Medical History to file
 	public void saveMedicalHistory(Patient patient) throws FileNotFoundException {
 		MedHistory medHistory = patient.getMedHistory();
 		String fileName = "src/assets/medHistory/" + patient.getFirstName() + patient.getLastName() + ".txt";
@@ -130,6 +136,7 @@ public class MedicalSystem {
 		pw.close();
 	}
 	
+	//Create a patient object based on information in the system and return it
 	public Patient getPatient(String fullName, String inputBirthday, String inputPass) throws FileNotFoundException {
 		String fileName = "src/assets/patients/" + fullName + ".txt";
 		File file = new File(fileName);
@@ -181,41 +188,11 @@ public class MedicalSystem {
 		}
 		
 		
-		// ignore this huge block of text. made it by mistake :( maybe we will need it somewhere else
-		/*
-		fileName = "src/assets/appointments/" + fullName + ".txt";
-		file = new File(fileName);
-		scan = new Scanner(file);
-		String date = scan.nextLine();
-		Appointment pApt = new Appointment(date);
-		if (scan.hasNext()) {	
-			pApt.setHeight(Float.parseFloat(scan.nextLine()));
-			pApt.setWeight(Float.parseFloat(scan.nextLine()));
-			pApt.setTemperature(Float.parseFloat(scan.nextLine()));
-			pApt.setBp(scan.nextLine());
-			pApt.setPrescriptions(scan.nextLine());
-			pApt.setExamResults(scan.nextLine());
-			pApt.setRecommendations(scan.nextLine());
-		}
-		scan.close();
-		
-		fileName = "src/assets/conversations/" + fullName + ".txt";
-		file = new File(fileName);
-		scan = new Scanner(file);
-		String pName = scan.nextLine();
-		String dName = scan.nextLine();
-		ArrayList<String> messages = new ArrayList<>();
-		while (scan.hasNext()) {
-			messages.add(scan.nextLine());
-		}
-		scan.close();
-		Conversation conversation = new Conversation(pName, dName, messages);
-		*/
-		
 		Patient patient = new Patient(firstName, lastName, birthday, pInfo, medHistory);
 		return patient;
 	}
 	
+	//Overloaded in order to get the patient without verifying the password (for doctors)
 	public Patient getPatient(String fullName, String inputBirthday) throws FileNotFoundException {
 		String fileName = "src/assets/patients/" + fullName + ".txt";
 		File file = new File(fileName);
@@ -266,6 +243,7 @@ public class MedicalSystem {
 		return patient;
 	}
 	
+	//Gets a specific visit form the file system and returns it in an Appointment object
 	public Appointment getAppointment(String fullName, int visitNum) throws FileNotFoundException {
 		String fileName;
 		if (visitNum == 0) {
