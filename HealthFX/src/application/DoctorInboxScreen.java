@@ -128,13 +128,13 @@ public class DoctorInboxScreen extends BorderPane {
 		rightColumn.setCenter(imageHolder);
 						
 		//Exit Button
-		exitButton = new Button("Exit");
+		exitButton = new Button("Log Out");
 		exitButton.setPrefSize(100, 100);
 		exitButton.setFont(buttonFont);
 		logoutHolder = new HBox(exitButton);
 		logoutHolder.setAlignment(Pos.CENTER);
 		rightColumn.setBottom(logoutHolder);
-		exitButton.setOnAction(new ExitHandler());
+		exitButton.setOnAction(new LogOutHandler());
 		
 		this.setCenter(bodyHolder);
 		this.setRight(rightColumn);
@@ -151,7 +151,7 @@ public class DoctorInboxScreen extends BorderPane {
 	    }
 
 	    // Handles exit: brings user back to HomePageScreen
-	    private class ExitHandler implements EventHandler<ActionEvent> {
+	    private class LogOutHandler implements EventHandler<ActionEvent> {
 
 	        @Override
 	        public void handle(ActionEvent event) {

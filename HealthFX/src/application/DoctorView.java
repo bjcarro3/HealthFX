@@ -149,7 +149,7 @@ public class DoctorView extends BorderPane {
 		exitHolder = new HBox(exitButton);
 		exitHolder.setAlignment(Pos.CENTER);
 		rightColumn.setBottom(exitHolder);
-		exitButton.setOnAction(new LogOutHandler());
+		exitButton.setOnAction(new ExitHandler());
 				
 		this.setLeft(leftColumn);
 		this.setRight(rightColumn);		
@@ -197,13 +197,13 @@ public class DoctorView extends BorderPane {
 		} //End handle
 	} //End subclass
 	
-	private class LogOutHandler implements EventHandler<ActionEvent> {
+	private class ExitHandler implements EventHandler<ActionEvent> {
 
 		@Override
 		public void handle(ActionEvent arg0) {
 			MedicalSystem medSys = MedicalSystem.getInstance();
 			savePatient();
-			medSys.toHomePage();
+			medSys.toDoctorSearch(doctor);
 		} //End handle
 	} //End subclass
 	

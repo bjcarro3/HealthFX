@@ -155,13 +155,13 @@ public class DoctorConversationScreen extends BorderPane {
 		rightColumn.setCenter(imageHolder);
 						
 		//Logout Button
-		logoutButton = new Button("Log Out");
+		logoutButton = new Button("Exit");
 		logoutButton.setPrefSize(100, 100);
 		logoutButton.setFont(buttonFont);
 		logoutHolder = new HBox(logoutButton);
 		logoutHolder.setAlignment(Pos.CENTER);
 		rightColumn.setBottom(logoutHolder);
-		logoutButton.setOnAction(new LogOutHandler());
+		logoutButton.setOnAction(new ExitHandler());
 						
 		
 		this.setCenter(bodyHolder);
@@ -202,12 +202,12 @@ public class DoctorConversationScreen extends BorderPane {
 		} //End handle
 	} //End subclass
 	
-	private class LogOutHandler implements EventHandler<ActionEvent> {
+	private class ExitHandler implements EventHandler<ActionEvent> {
 
 		@Override
 		public void handle(ActionEvent arg0) {
 			MedicalSystem medSys = MedicalSystem.getInstance();
-			medSys.toHomePage();
+			medSys.toDoctorSearch(doctor);
 		} //End handle
 	} //End subclass
 }
