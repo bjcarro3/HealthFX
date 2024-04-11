@@ -1,6 +1,6 @@
 //Group: Tu37
 //Description: Singleton system object used to create and navigate to new UIs and to handle saving and loading
-//			   Patients and their information from the file system
+//			   Patients and their information from the file . Multi-line attributes end with a ` character
 
 package application;
 import java.io.*;
@@ -117,7 +117,7 @@ public class MedicalSystem {
 		pw.println(pInfo.getGuardianPhone());
 		pw.println(pInfo.getEmergencyName());
 		pw.println(pInfo.getEmergencyPhone());
-		pw.println(pInfo.getInsuranceInfo());
+		pw.println(pInfo.getInsuranceInfo() + "`");
 		pw.println(pInfo.getPharmacyName());
 		pw.println(pInfo.getPharmacyAddress());
 		pw.close();
@@ -128,11 +128,11 @@ public class MedicalSystem {
 		MedHistory medHistory = patient.getMedHistory();
 		String fileName = "src/assets/medHistory/" + patient.getFirstName() + patient.getLastName() + ".txt";
 		PrintWriter pw = new PrintWriter(fileName);
-		pw.println(medHistory.getAllergies());
-		pw.println(medHistory.getConcerns());
-		pw.println(medHistory.getHealthIssues());
-		pw.println(medHistory.getMedications());
-		pw.println(medHistory.getImmunizations());
+		pw.println(medHistory.getAllergies() + "`");
+		pw.println(medHistory.getConcerns() + "`");
+		pw.println(medHistory.getHealthIssues() + "`");
+		pw.println(medHistory.getMedications() + "`");
+		pw.println(medHistory.getImmunizations() + "`");
 		pw.close();
 	}
 	
@@ -150,9 +150,9 @@ public class MedicalSystem {
 		pw.println(appt.getWeight());
 		pw.println(appt.getTemperature());
 		pw.println(appt.getBp());
-		pw.println(appt.getPrescriptions());
-		pw.println(appt.getExamResults());
-		pw.println(appt.getRecommendations());
+		pw.println(appt.getPrescriptions() + "`");
+		pw.println(appt.getExamResults() + "`");
+		pw.println(appt.getRecommendations() + "`");
 		pw.close();
 	}
 	
@@ -188,7 +188,9 @@ public class MedicalSystem {
 			pInfo.setGuardianPhone(scan.nextLine());
 			pInfo.setEmergencyName(scan.nextLine());
 			pInfo.setEmergencyPhone(scan.nextLine());
-			pInfo.setInsuranceInfo(scan.nextLine());
+			
+			pInfo.setInsuranceInfo(readMultiLine(scan));
+			
 			pInfo.setPharmacyName(scan.nextLine());
 			pInfo.setPharmacyAddress(scan.nextLine());
 			scan.close();
@@ -199,11 +201,11 @@ public class MedicalSystem {
 		file = new File(fileName);
 		if (file.exists()) {
 			scan = new Scanner(file);
-			medHistory.setAllergies(scan.nextLine());
-			medHistory.setConcerns(scan.nextLine());
-			medHistory.setHealthIssues(scan.nextLine());
-			medHistory.setMedications(scan.nextLine());
-			medHistory.setImmunizations(scan.nextLine());
+			medHistory.setAllergies(readMultiLine(scan));
+			medHistory.setConcerns(readMultiLine(scan));
+			medHistory.setHealthIssues(readMultiLine(scan));
+			medHistory.setMedications(readMultiLine(scan));
+			medHistory.setImmunizations(readMultiLine(scan));
 			scan.close();
 		}
 		
@@ -240,7 +242,9 @@ public class MedicalSystem {
 			pInfo.setGuardianPhone(scan.nextLine());
 			pInfo.setEmergencyName(scan.nextLine());
 			pInfo.setEmergencyPhone(scan.nextLine());
-			pInfo.setInsuranceInfo(scan.nextLine());
+			
+			pInfo.setInsuranceInfo(readMultiLine(scan));
+			
 			pInfo.setPharmacyName(scan.nextLine());
 			pInfo.setPharmacyAddress(scan.nextLine());
 			scan.close();
@@ -251,11 +255,11 @@ public class MedicalSystem {
 		file = new File(fileName);
 		if (file.exists()) {
 			scan = new Scanner(file);
-			medHistory.setAllergies(scan.nextLine());
-			medHistory.setConcerns(scan.nextLine());
-			medHistory.setHealthIssues(scan.nextLine());
-			medHistory.setMedications(scan.nextLine());
-			medHistory.setImmunizations(scan.nextLine());
+			medHistory.setAllergies(readMultiLine(scan));
+			medHistory.setConcerns(readMultiLine(scan));
+			medHistory.setHealthIssues(readMultiLine(scan));
+			medHistory.setMedications(readMultiLine(scan));
+			medHistory.setImmunizations(readMultiLine(scan));
 			scan.close();
 		}
 		
@@ -283,9 +287,9 @@ public class MedicalSystem {
 			pApt.setWeight(Float.parseFloat(scan.nextLine()));
 			pApt.setTemperature(Float.parseFloat(scan.nextLine()));
 			pApt.setBp(scan.nextLine());
-			pApt.setPrescriptions(scan.nextLine());
-			pApt.setExamResults(scan.nextLine());
-			pApt.setRecommendations(scan.nextLine());
+			pApt.setPrescriptions(readMultiLine(scan));
+			pApt.setExamResults(readMultiLine(scan));
+			pApt.setRecommendations(readMultiLine(scan));
 		}
 		scan.close();
 		
@@ -341,6 +345,22 @@ public class MedicalSystem {
 			e.printStackTrace();
 		}
 
-}
+	}
+	
+	
+	//Returns a multi-line string from the file system using the scanner, ending with `
+	private String readMultiLine(Scanner scan) {
+		//Handle multiline insuranceInfo
+		StringBuilder builder = new StringBuilder();
+		String inString = "";
+		while (inString.length() < 1 || inString.charAt(inString.length()-1) != '`') {
+			inString = scan.nextLine();
+			builder.append(inString + "\n");
+		}
+		builder.delete(builder.length() - 2, builder.length()); //Delete `\n at end
+		
+		return builder.toString();
+	}
+	
 }
 
