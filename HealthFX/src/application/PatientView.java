@@ -82,11 +82,19 @@ public class PatientView extends BorderPane {
 		for (int i = 0; i < visitButton.length; i++) {
 			final int index = i;
 			
-			visitButton[i] = new Button("Visit " + (i + 1));
+			MedicalSystem medSys = MedicalSystem.getInstance();
+			String visitDate = Integer.toString(i + 1);
+			try {
+				visitDate = medSys.getAppointment(patient.getFirstName() + patient.getLastName(), i).getDate();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			visitButton[i] = new Button("Visit " + visitDate);
 			visitButton[i].setFont(buttonFont);
 			
 			visitButton[i].setOnAction(event -> {
-				MedicalSystem medSys = MedicalSystem.getInstance();
 				savePatient();
 				medSys.toPatientVisitScreen(patient, index);
 			});

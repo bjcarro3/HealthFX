@@ -4,11 +4,11 @@
 package application;
 
 public class MedHistory {
-	private String allergies;
-	private String concerns;
-	private String healthIssues;
-	private String medications;
-	private String immunizations;
+	private String allergies = "";
+	private String concerns = "";
+	private String healthIssues = "";
+	private String medications = "";
+	private String immunizations = "";
 	
 	public MedHistory() {
 	}
