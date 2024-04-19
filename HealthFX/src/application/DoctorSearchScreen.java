@@ -4,9 +4,7 @@
 
 package application;
 
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Scanner;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -29,6 +27,7 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 
 public class DoctorSearchScreen extends BorderPane {
+	private Doctor doctor;
 	
 	private VBox messageHolder; //Holds messageButton to align
 	private VBox titleHolder; //Holds title and prompt to align
@@ -44,9 +43,6 @@ public class DoctorSearchScreen extends BorderPane {
 	private TextField birthdayField;
 	private Button getRecordsButton;
 	private Button logoutButton;
-	
-	private Doctor doctor;
-	private File patientFile;
 	
 	public DoctorSearchScreen(Doctor doctor) {
 		this.doctor = doctor;
@@ -169,8 +165,6 @@ public class DoctorSearchScreen extends BorderPane {
 					statusLabel.setTextFill(Color.RED);
 				}
 			}
-			//Checks first and last name via file location
-			patientFile = new File("src/assets/patients/" + firstNameField.getText() + lastNameField.getText() + ".txt");
 			
 		} //End handle
 	} //End subclass

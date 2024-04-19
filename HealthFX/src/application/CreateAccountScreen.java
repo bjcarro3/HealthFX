@@ -6,8 +6,6 @@ package application;
 
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -46,15 +44,6 @@ public class CreateAccountScreen extends BorderPane {
 	private Button createAccountButton;
 	private Button backButton;
 	
-	private Patient newPatient;
-	private PatientInfo newPatientInfo;
-	private MedHistory newMedHistory;
-	
-	private File newPatientDir;
-	private File patientLoginInfo;
-	private File patientData;
-	
-	private FileWriter writer;
 	
 	
 	public CreateAccountScreen() {
@@ -149,7 +138,7 @@ public class CreateAccountScreen extends BorderPane {
 			}
 			
 			//Checks if info for patient already exists
-			patientLoginInfo = new File("src/assets/patients/" + firstNameField.getText() + lastNameField.getText() + ".txt");
+			File patientLoginInfo = new File("src/assets/patients/" + firstNameField.getText() + lastNameField.getText() + ".txt");
 			if(patientLoginInfo.exists()) {
 				statusLabel.setText("Account Could Not Be Created: Patient Already Exists");
 				statusLabel.setTextFill(Color.RED);

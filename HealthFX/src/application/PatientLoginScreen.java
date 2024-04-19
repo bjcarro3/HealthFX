@@ -3,10 +3,9 @@
 //			   system by name, birthday, and a password to log in.
 
 package application;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
 
+
+import java.io.FileNotFoundException;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -43,18 +42,6 @@ public class PatientLoginScreen extends BorderPane {
 	private Button createAccountButton;
 	private Button loginButton;
 	private Button backButton;
-	
-	private Patient loginPatient;
-	private MedHistory medHist;
-	private PatientInfo patientInfo;
-	private String firstName;
-	private String lastName;
-	private String birthday;
-	
-	
-	private File loginCheckFile;
-	private File loginInfo;
-	private Scanner patientScanner;
 	
 	
 	public PatientLoginScreen() {

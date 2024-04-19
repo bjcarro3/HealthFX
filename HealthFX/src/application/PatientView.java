@@ -6,7 +6,6 @@ package application;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -29,7 +28,6 @@ public class PatientView extends BorderPane {
 	protected Patient patient;
 	private Label patientName;
 	private Button contactButton;
-	private ArrayList<Button> visitButtons;
 	private Button[] visitButton;
 	private Button messagesButton;
 	private Button logoutButton;
@@ -143,6 +141,16 @@ public class PatientView extends BorderPane {
 		this.setRight(rightColumn);
 	}
 	
+	protected void savePatient() {
+		MedicalSystem medSys = MedicalSystem.getInstance();
+		try {
+			medSys.savePatientInfo(patient);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
 	private class ContactHandler implements EventHandler<ActionEvent> {
 
 		@Override
@@ -162,15 +170,6 @@ public class PatientView extends BorderPane {
 			medSys.toPatientMessageScreen(patient);
 		} //End handle
 	} //End subclass
-	
-	protected void savePatient() {
-		MedicalSystem medSys = MedicalSystem.getInstance();
-		try {
-			medSys.savePatientInfo(patient);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-	}
 	
 	private class LogOutHandler implements EventHandler<ActionEvent> {
 

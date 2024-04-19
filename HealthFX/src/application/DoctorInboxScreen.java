@@ -33,7 +33,6 @@ public class DoctorInboxScreen extends BorderPane {
 	private VBox bodyHolder;
 	private Label titleLabel;
 	private ArrayList<Button> messageList;
-	private int numPatient;
 	
 	
 	//Right side
@@ -45,13 +44,9 @@ public class DoctorInboxScreen extends BorderPane {
 	private HBox imageHolder;
 	private HBox logoutHolder;
 	
-	private File files;
-	
 	public DoctorInboxScreen(Doctor doctor) {
 		this.doctor = doctor;
-		//setupEventHandlers();
 		Font titleFont = Font.font("Verdana", 25);
-		Font textFont = Font.font("Verdana", 15);
 		Font buttonFont = Font.font("Verdana", 12);
 		
 		//Main Body
@@ -67,7 +62,6 @@ public class DoctorInboxScreen extends BorderPane {
 		// Calculate number of patients
 		File dir = new File("src/assets/patients");
 		File[] directoryListing = dir.listFiles();
-		numPatient = directoryListing.length;
 		messageList = new ArrayList<Button>();
 		for (File child : directoryListing) { //For each patient, create a button in the inbox
 			

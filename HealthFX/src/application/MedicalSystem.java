@@ -4,7 +4,6 @@
 
 package application;
 import java.io.*;
-import java.util.Random;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -14,7 +13,6 @@ import javafx.scene.Scene;
 public class MedicalSystem {
 	private static MedicalSystem instance = null;
 	private Scene scene;
-	public ArrayList<String> allPatients = new ArrayList<>();
 	
 	private MedicalSystem() {
 

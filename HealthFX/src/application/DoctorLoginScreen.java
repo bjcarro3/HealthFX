@@ -42,13 +42,6 @@ public class DoctorLoginScreen extends BorderPane {
 	private Button loginButton;
 	private Button backButton;
 	
-	private File checkDoctor;
-	private Scanner doctorScanner;
-	
-	private String doctorName;
-	private ArrayList<Conversation> doctorConversations;
-	private Doctor doctor;
-	
 	public DoctorLoginScreen() {
 		//Logo
 		Image logoImage = new Image("/assets/logo.png");
@@ -130,18 +123,18 @@ public class DoctorLoginScreen extends BorderPane {
 		@Override
 		public void handle(ActionEvent arg0) {
 			//Checks Username
-			checkDoctor = new File("src/assets/Data/Doctors/" + usernameField.getText());
+			File checkDoctor = new File("src/assets/Data/Doctors/" + usernameField.getText());
 			if(checkDoctor.exists()) {
 				try {
 					//Make a scanner to get the password
-					doctorScanner = new Scanner(checkDoctor);
+					Scanner doctorScanner = new Scanner(checkDoctor);
 					
 					//Check if password is equal to input
 					if(doctorScanner.nextLine().equals(passwordField.getText())){
-						doctorName = doctorScanner.nextLine();
-						doctorConversations = new ArrayList<Conversation>();
+						String doctorName = doctorScanner.nextLine();
+						ArrayList<Conversation> doctorConversations = new ArrayList<Conversation>();
 						
-						doctor = new Doctor(doctorName, doctorConversations);
+						Doctor doctor = new Doctor(doctorName, doctorConversations);
 						
 						MedicalSystem medSys = MedicalSystem.getInstance();
 						medSys.toDoctorSearch(doctor);
@@ -150,6 +143,8 @@ public class DoctorLoginScreen extends BorderPane {
 							statusLabel.setText("Incorrect Login Information");
 							statusLabel.setTextFill(Color.RED);
 						}
+					doctorScanner.close();
+					
 				} catch (FileNotFoundException e) {
 					statusLabel.setText("Incorrect Login Information");
 					statusLabel.setTextFill(Color.RED);
